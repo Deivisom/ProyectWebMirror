@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam Profile Replica</title>
+    <link rel="stylesheet" href="./data/styles.css">
+</head>
+
+<body>
+
+    <div class="top-menu-bar">
+        <span>Steam</span> <span>Ver</span> <span>Amigos</span> <span>Productos</span> <span>Ayuda</span>
+        <div class="win-controls"><span>--</span> <span>▢</span> <span>X</span></div>
+    </div>
+
+    <nav class="steam-nav">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#">TIENDA</a> <a href="#">BIBLIOTECA</a> <a href="#">COMUNIDAD</a> <a href="#"
+                    class="active-user">AKN.RAOUIA</a>
+            </div>
+            <div class="nav-right">
+                <span>akn.raouia <small style="color:var(--steam-grey)">0,49€</small></span>
+                <img src="./img/benny.jpg" class="mini-avatar">
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <header class="profile-header">
+                <div class="avatar-frame"><img class="main-avatar" src="./img/benny.jpg"></div>
+                <div class="profile-info">
+                    <h2 class="persona-name">akn.raouia</h2>
+                </div>
+                <div class="level-box">
+                    <span style="font-size:18px">Nivel</span>
+                    <div class="level-badge">3</div><br>
+                    <button class="edit-profile">Modificar perfil</button>
+                </div>
+            </header>
+
+            <div class="content-layout">
+                <div class="left-col">
+
+                    <div class="content-box">
+                        <div class="section-header">
+                            <h3 class="section-title">Actividad reciente</h3>
+                            <span class="recent-hours">52,2 h en estas 2 semanas</span>
+                        </div>
+
+                        <div class="game-item">
+                            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg"
+                                class="game-header-img">
+                            <div class="game-info">
+                                <span class="last-session">última sesión: 11 MAR</span>
+                                <h4>Apex Legends</h4>
+                                <p class="game-stats">85 h registradas</p>
+
+                                <div class="achievement-row">
+                                    <div class="achievement-label">
+                                        <span>Avance en los logros</span>
+                                        <span class="achievement-count">12 de 12 <span
+                                                class="plus-more">+7</span></span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-item">
+                            <img src="./img/fivem.jpg" class="game-header-img">
+                            <div class="game-info">
+                                <span class="last-session">última sesión: 10 MAR</span>
+                                <h4>FiveM</h4>
+                                <p class="game-stats">500 h registradas</p>
+                            </div>
+                        </div>
+
+                        <div class="game-item">
+                            <img src="./img/images.jpg" class="game-header-img">
+                            <div class="game-info">
+                                <span class="last-session">última sesión: 2 DEC</span>
+                                <h4>ARC Riders</h4>
+                                <p class="game-stats">45 h registradas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-box">
+                        <div class="section-header">
+                            <h3 class="section-title">Comentarios</h3>
+                            <span style="font-size:11px; color:var(--steam-grey)"><input type="checkbox" checked>
+                                Suscribirse al hilo</span>
+                        </div>
+                        <div class="comment-input-area">
+                            <img src="./img/benny.jpg" style="width:34px; height:34px;">
+                            <div class="comment-box">Añadir un comentario</div>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <img src="./img/elena.jpg" class="comment-avatar">
+                                <div class="comment-content">
+                                    <a href="#" class="comment-author">!Nicolau</a> <span class="comment-date">12 FEB
+                                        2025 a las 16:43</span>
+                                    <p class="comment-text">hola soy nico!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-col">
+                    <div class="side-panel" style="padding-left: 15px;">
+                        <h4 style="color:var(--steam-grey); font-weight:normal;">Sin conexión</h4>
+                        <p style="font-size:12px; color:#555;">Última conexión: hace 6 días</p>
+                    </div>
+
+                    <div class="content-box">
+                        <h3 class="section-title" style="margin-bottom: 15px;">Amigos <span style="float:right"
+                                class="count">23</span></h3>
+                        <div class="friend-item">
+                            <img src="./img/elena.jpg" class="friend-avatar">
+                            <div class="friend-info">
+                                <span class="name">!Nicolau</span>
+                                <span class="status">Última conexión: hace 14 h</span>
+                            </div>
+                            <div class="friend-level">56</div>
+                        </div>
+                        <div class="friend-item">
+                            <img src="./img/bridg.jpg" class="friend-avatar">
+                            <div class="friend-info">
+                                <span class="name">Uta</span>
+                                <span class="status" style="color:#57cbde">En línea</span>
+                            </div>
+                            <div class="friend-level" style="border-color:#d95b43">25</div>
+                        </div>
+                        <div class="friend-item">
+                            <img src="./img/blair.jpg" class="friend-avatar">
+                            <div class="friend-info">
+                                <span class="name">Azap</span>
+                                <span class="status" style="color:#57cbde">En línea</span>
+                            </div>
+                            <div class="friend-level" style="border-color:#d95b43">25</div>
+                        </div>
+                    </div>
+
+                    <div class="side-panel" style="padding: 0 15px;">
+                        <a href="#" class="s-link">Juegos <span class="count">15</span></a>
+                        <a href="#" class="s-link">Inventario</a>
+                        <a href="#" class="s-link">Capturas</a>
+                        <a href="#" class="s-link">Reseñas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="steam-footer">
+        <div class="footer-content">
+            <img src="./img/valve.jpg" class="valve-logo">
+            <p>© Valve Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus
+                respectivos dueños en EE. UU. y otros países.</p>
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a> | <a href="#">Información legal</a> | <a href="#">Acuerdo de
+                    Suscriptor a Steam</a> | <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</div>
