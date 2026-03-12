@@ -1,394 +1,406 @@
 /* --- RESET Y VARIABLES --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        :root {
-            --steam-dark: #171a21;
-            --steam-body: #0d121a;
-            --steam-blue: #66c0f4;
-            --steam-grey: #8f98a0;
-            --steam-dark-grey: #3d4450;
-            --text-light: #f3f3f3;
-            --border-grey: rgba(255, 255, 255, 0.1);
-            --box-bg: rgba(0, 0, 0, 0.4);
-        }
+:root {
+    --steam-dark: #171a21;
+    --steam-body: #0d121a;
+    --steam-blue: #66c0f4;
+    --steam-grey: #8f98a0;
+    --steam-dark-grey: #3d4450;
+    --text-light: #f3f3f3;
+    --border-grey: rgba(255, 255, 255, 0.1);
+    --box-bg: rgba(0, 0, 0, 0.4);
+}
 
-        body {
-            background-color: var(--steam-body);
-            color: var(--text-light);
-            font-family: "Motiva Sans", Arial, sans-serif;
-            font-size: 13px;
-        }
+body {
+    background-color: var(--steam-body);
+    color: var(--text-light);
+    font-family: "Motiva Sans", Arial, sans-serif;
+    font-size: 13px;
+}
 
-        .top-menu-bar {
-            background: #171a21;
-            height: 26px;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            gap: 12px;
-            font-size: 11px;
-            color: #b8b6b4;
-        }
-        .top-menu-bar span:hover { color: #fff; cursor: pointer; }
-        .win-controls { margin-left: auto; display: flex; gap: 15px; color: #8f98a0; padding-right: 5px; }
-        /* --- NAVEGACIÓN --- */
-        .steam-nav {
-            background: var(--steam-dark);
-            height: 60px;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-        }
+.top-menu-bar {
+    background: #171a21;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 12px;
+    font-size: 11px;
+    color: #b8b6b4;
+}
 
-        .nav-container {
-            width: 100%;
-            max-width: 940px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.top-menu-bar span:hover {
+    color: #fff;
+    cursor: pointer;
+}
 
-        .nav-links a {
-            color: #c7d5e0;
-            text-decoration: none;
-            margin-right: 15px;
-            font-size: 14px;
-            font-weight: bold;
-        }
+.win-controls {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+    color: #8f98a0;
+    padding-right: 5px;
+}
 
-        .active-user {
-            color: var(--steam-blue) !important;
-            border-bottom: 2px solid var(--steam-blue);
-            padding-bottom: 5px;
-        }
+/* --- NAVEGACIÓN --- */
+.steam-nav {
+    background: var(--steam-dark);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+}
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-        }
+.nav-container {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .mini-avatar {
-            width: 34px;
-            height: 34px;
-        }
+.nav-links a {
+    color: #c7d5e0;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
-        /* --- WRAPPER Y FONDO --- */
-        .main-wrapper {
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                url('https://i.imgur.com/rN9kZpU.jpeg') no-repeat center top fixed;
-            background-size: cover;
-            padding: 0 0 40px;
-            min-height: 100vh;
-        }
+.active-user {
+    color: var(--steam-blue) !important;
+    border-bottom: 2px solid var(--steam-blue);
+    padding-bottom: 5px;
+}
 
-        .container {
-            max-width: 940px;
-            margin: 0 auto;
-            background: rgba(23, 26, 33, 0.85);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-        }
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
 
-        /* --- HEADER --- */
-        .profile-header {
-            padding: 24px;
-            display: flex;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
-        }
+.mini-avatar {
+    width: 34px;
+    height: 34px;
+}
 
-        .avatar-frame {
-            padding: 4px;
-            background: linear-gradient(135deg, #7a7a7a, #333);
-            height: 164px;
-        }
+/* --- WRAPPER Y FONDO --- */
+.main-wrapper {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('https://i.imgur.com/rN9kZpU.jpeg') no-repeat center top fixed;
+    background-size: cover;
+    padding: 0 0 40px;
+    min-height: 100vh;
+}
 
-        .main-avatar {
-            width: 164px;
-            height: 164px;
-            display: block;
-        }
+.container {
+    max-width: 940px;
+    margin: 0 auto;
+    background: rgba(23, 26, 33, 0.85);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
 
-        .profile-info {
-            flex: 1;
-            padding-left: 20px;
-        }
+/* --- HEADER --- */
+.profile-header {
+    padding: 24px;
+    display: flex;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), transparent);
+}
 
-        .persona-name {
-            font-size: 28px;
-            font-weight: 300;
-            margin-bottom: 10px;
-        }
+.avatar-frame {
+    padding: 4px;
+    background: linear-gradient(135deg, #7a7a7a, #333);
+    height: 164px;
+}
 
-        .level-box {
-            text-align: right;
-        }
+.main-avatar {
+    width: 164px;
+    height: 164px;
+    display: block;
+}
 
-        .level-badge {
-            border: 2px solid #4e8ddb;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            line-height: 36px;
-            text-align: center;
-            display: inline-block;
-            font-size: 16px;
-        }
+.profile-info {
+    flex: 1;
+    padding-left: 20px;
+}
 
-        .edit-profile {
-            background: var(--steam-dark-grey);
-            border: none;
-            color: #fff;
-            padding: 8px 15px;
-            margin-top: 20px;
-            cursor: pointer;
-            border-radius: 2px;
-        }
+.persona-name {
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
 
-        /* --- LAYOUT --- */
-        .content-layout {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            padding: 0 24px 24px 24px;
-            gap: 30px;
-        }
+.level-box {
+    text-align: right;
+}
 
-        /* --- CAJAS (BOXES) --- */
-        .content-box {
-            background: var(--box-bg);
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 3px;
-        }
+.level-badge {
+    border: 2px solid #4e8ddb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-grey);
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
+.edit-profile {
+    background: var(--steam-dark-grey);
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 2px;
+}
 
-        .section-title {
-            font-size: 14px;
-            text-transform: uppercase;
-            color: #fff;
-        }
+/* --- LAYOUT --- */
+.content-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    padding: 0 24px 24px 24px;
+    gap: 30px;
+}
 
-        .recent-hours {
-            color: var(--steam-grey);
-            font-size: 12px;
-        }
+/* --- CAJAS (BOXES) --- */
+.content-box {
+    background: var(--box-bg);
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 3px;
+}
 
-        /* --- JUEGOS Y LOGROS --- */
-        .game-item {
-            background: rgba(0, 0, 0, 0.2);
-            display: flex;
-            margin-bottom: 15px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-grey);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
 
-        .game-header-img {
-            width: 184px;
-            height: 86px;
-            object-fit: cover;
-        }
+.section-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+}
 
-        .game-info {
-            padding: 12px;
-            flex: 1;
-        }
+.recent-hours {
+    color: var(--steam-grey);
+    font-size: 12px;
+}
 
-        .game-info h4 {
-            color: var(--steam-blue);
-            font-weight: normal;
-            margin-bottom: 4px;
-            font-size: 15px;
-        }
+/* --- JUEGOS Y LOGROS --- */
+.game-item {
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    overflow: hidden;
+}
 
-        .game-stats {
-            font-size: 11px;
-            color: var(--steam-grey);
-        }
+.game-header-img {
+    width: 184px;
+    height: 86px;
+    object-fit: cover;
+}
 
-        .last-session {
-            float: right;
-            color: #555;
-            font-size: 11px;
-        }
+.game-info {
+    padding: 12px;
+    flex: 1;
+}
 
-        /* Logros */
-        .achievement-row {
-            margin-top: 8px;
-        }
+.game-info h4 {
+    color: var(--steam-blue);
+    font-weight: normal;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
 
-        .achievement-label {
-            font-size: 11px;
-            color: var(--steam-grey);
-            margin-bottom: 4px;
-            display: flex;
-            justify-content: space-between;
-        }
+.game-stats {
+    font-size: 11px;
+    color: var(--steam-grey);
+}
 
-        .achievement-count {
-            color: #fff;
-        }
+.last-session {
+    float: right;
+    color: #555;
+    font-size: 11px;
+}
 
-        .plus-more {
-            background: #3d4450;
-            color: #eee;
-            padding: 1px 4px;
-            border-radius: 2px;
-            font-size: 10px;
-            margin-left: 5px;
-        }
+/* Logros */
+.achievement-row {
+    margin-top: 8px;
+}
 
-        .progress-bar {
-            height: 8px;
-            background: #1a1a1a;
-            border-radius: 1px;
-            width: 100%;
-            overflow: hidden;
-        }
+.achievement-label {
+    font-size: 11px;
+    color: var(--steam-grey);
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
 
-        .progress-fill {
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(to right, #4b6a22, #8ed02d);
-        }
+.achievement-count {
+    color: #fff;
+}
 
-        /* --- COMENTARIOS --- */
-        .comment-input-area {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px;
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
+.plus-more {
+    background: #3d4450;
+    color: #eee;
+    padding: 1px 4px;
+    border-radius: 2px;
+    font-size: 10px;
+    margin-left: 5px;
+}
 
-        .comment-box {
-            background: #101216;
-            border: 1px solid #000;
-            color: var(--steam-grey);
-            padding: 8px;
-            flex: 1;
-            font-style: italic;
-        }
+.progress-bar {
+    height: 8px;
+    background: #1a1a1a;
+    border-radius: 1px;
+    width: 100%;
+    overflow: hidden;
+}
 
-        .comment-item {
-            display: flex;
-            gap: 10px;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+.progress-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to right, #4b6a22, #8ed02d);
+}
 
-        .comment-avatar {
-            width: 34px;
-            height: 34px;
-        }
+/* --- COMENTARIOS --- */
+.comment-input-area {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
 
-        .comment-author {
-            color: #fff;
-            font-weight: bold;
-            text-decoration: none;
-        }
+.comment-box {
+    background: #101216;
+    border: 1px solid #000;
+    color: var(--steam-grey);
+    padding: 8px;
+    flex: 1;
+    font-style: italic;
+}
 
-        .comment-date {
-            color: #555;
-            font-size: 11px;
-            margin-left: 8px;
-        }
+.comment-item {
+    display: flex;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-        .comment-text {
-            color: #acb2b8;
-            margin-top: 4px;
-        }
+.comment-avatar {
+    width: 34px;
+    height: 34px;
+}
 
-        /* --- LATERAL --- */
-        .side-panel {
-            margin-bottom: 25px;
-        }
+.comment-author {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
 
-        .friend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
+.comment-date {
+    color: #555;
+    font-size: 11px;
+    margin-left: 8px;
+}
 
-        .friend-avatar {
-            width: 34px;
-            height: 34px;
-            border: 1px solid #57cbde;
-        }
+.comment-text {
+    color: #acb2b8;
+    margin-top: 4px;
+}
 
-        .friend-info .name {
-            display: block;
-            color: #57cbde;
-            font-weight: bold;
-        }
+/* --- LATERAL --- */
+.side-panel {
+    margin-bottom: 25px;
+}
 
-        .friend-info .status {
-            color: var(--steam-grey);
-            font-size: 11px;
-        }
+.friend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
 
-        .friend-level {
-            margin-left: auto;
-            border: 2px solid #4e8ddb;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            text-align: center;
-            line-height: 20px;
-            font-size: 10px;
-        }
+.friend-avatar {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #57cbde;
+}
 
-        .s-link {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
+.friend-info .name {
+    display: block;
+    color: #57cbde;
+    font-weight: bold;
+}
 
-        .count {
-            color: var(--steam-blue);
-        }
+.friend-info .status {
+    color: var(--steam-grey);
+    font-size: 11px;
+}
 
-        /* --- FOOTER --- */
-        .steam-footer {
-            background: #000;
-            padding: 40px 0;
-            color: #8f98a0;
-            font-size: 12px;
-        }
+.friend-level {
+    margin-left: auto;
+    border: 2px solid #4e8ddb;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10px;
+}
 
-        .footer-content {
-            max-width: 940px;
-            margin: 0 auto;
-            text-align: left;
-            border-top: 1px solid #363c44;
-            padding-top: 20px;
-        }
+.s-link {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-        .valve-logo {
-            height: 25px;
-            filter: opacity(0.5);
-            margin-bottom: 10px;
-        }
+.count {
+    color: var(--steam-blue);
+}
 
-        .footer-links a {
-            color: #c7d5e0;
-            text-decoration: none;
-            margin-right: 10px;
-        }
+/* --- FOOTER --- */
+.steam-footer {
+    background: #000;
+    padding: 40px 0;
+    color: #8f98a0;
+    font-size: 12px;
+}
+
+.footer-content {
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: left;
+    border-top: 1px solid #363c44;
+    padding-top: 20px;
+}
+
+.valve-logo {
+    height: 25px;
+    filter: opacity(0.5);
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #c7d5e0;
+    text-decoration: none;
+    margin-right: 10px;
+}
