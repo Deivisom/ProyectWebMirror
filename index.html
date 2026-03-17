@@ -1,39 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menu principal</title>
-</head>
-<body>
-<header>
-      <div class="logo"><img src="./img/img_nav/logo.png" alt="" /></div>
-      <nav>
-        <a href="*">Inicio</a>
-        <a href="*">Tienda</a>
-        <a href="*">Canales</a>
-        <div class="item-menu">
-          <a href="*">Categorias</a>
-          <div class="submenu">
-            <a href="*">Serie</a>
-            <a href="*">Pelicula</a>
-            <a href="*">Infantil</a>
-            <a href="*">Prime</a>
-            <a href="*">Original</a>
-          </div>
-        </div>
-        <a href="*">Mi espacio</a>
-      </nav>
-      <div class="contenedor-derecho">
-        <div class="buscador">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="search" id="buscador" placeholder="Buscar" />
-        </div>
-        <div class="Usuario">
-          <i class="fa-regular fa-user"></i>
-          <a href="*">Deivisom</a>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Steam Store Clone</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="top-header">
+      <div class="container top-bar">
+        <div class="install-section">
+          <a href="#" class="btn-install">Instalar Steam</a>
+          <a href="#">iniciar sesión</a> | <a href="#">idioma</a>
         </div>
       </div>
+      <div class="container main-nav">
+        <div class="logo">
+          <img
+            src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
+            alt="Steam"
+          />
+        </div>
+        <ul class="menu-links">
+          <li><a href="#" class="active">TIENDA</a></li>
+          <li><a href="#">COMUNIDAD</a></li>
+          <li><a href="#">ACERCA DE</a></li>
+          <li><a href="#">SOPORTE</a></li>
+        </ul>
+      </div>
     </header>
-</body>
+
+    <nav class="sub-header">
+      <div class="container sub-nav-content">
+        <ul class="sub-menu">
+          <li><a href="#">Explorar</a></li>
+          <li><a href="#">Recomendaciones</a></li>
+          <li><a href="#">Categorías</a></li>
+          <li><a href="#">Hardware</a></li>
+          <li><a href="#">Noticias</a></li>
+        </ul>
+        <div class="search-container">
+          <input type="text" placeholder="buscar en la tienda" />
+          <button>buscar</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container-banner">
+      <section class="main-banner">
+        <img src="./img/img_nav/banner.png" alt="Ofertas Square Enix" />
+      </section>
+    </main>
+    <!-- Sección de destacados y recomendados -->
+    <section class="destacados container">
+      <h2 class="section-title">Destacados y recomendados</h2>
+
+      <div class="carousel-container-main" style="position: relative">
+        <button class="arrow prev" id="prevBtn">&#10094;</button>
+
+        <div id="carousel-content"></div>
+
+        <button class="arrow next" id="nextBtn">&#10095;</button>
+      </div>
+
+      <div class="carousel-dots" id="dots-container"></div>
+    </section>
+    <!-- Sección de ofertas y eventos -->
+    <section class="descuentos-seccion container">
+      <div class="header-with-link">
+        <h2 class="section-title">Descuentos y eventos</h2>
+        <a href="#" class="btn-ver-mas">VER MÁS</a>
+      </div>
+
+      <div class="carousel-offers-wrapper">
+        <button class="arrow prev" id="prevOfferBtn">&#10094;</button>
+
+        <div class="offers-layout" id="offers-container"></div>
+
+        <button class="arrow next" id="nextOfferBtn">&#10095;</button>
+      </div>
+    </section>
+
+    <!-- Sección de listado de juegos -->
+    <section class="tabbed-list-section container">
+      <div class="tabs-nav">
+        <button class="tab-link active" onclick="filterTabs('novedades')">
+          Novedades destacadas
+        </button>
+        <button class="tab-link" onclick="filterTabs('ventas')">
+          Lo más vendido
+        </button>
+        <button class="tab-link" onclick="filterTabs('proximos')">
+          Próximos lanzamientos
+        </button>
+      </div>
+
+      <div class="tabs-content-wrapper">
+        <div class="list-side" id="main-games-list"></div>
+
+        <div class="preview-side" id="preview-container"></div>
+      </div>
+    </section>
+  </body>
 </html>

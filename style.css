@@ -1,0 +1,523 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Motiva Sans", Arial, Helvetica, sans-serif;
+}
+
+body {
+  background-color: #1b2838;
+  color: #c6d4df;
+}
+
+/* EL CONTENEDOR MAESTRO (940px es la clave) */
+.container {
+  width: 940px;
+  margin: 0 auto;
+}
+
+/* HEADER SUPERIOR */
+.top-header {
+  background-color: #171a21;
+  padding-bottom: 15px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 0;
+  font-size: 11px;
+}
+
+.top-bar a {
+  color: #b8b6b4;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.btn-install {
+  background-color: #5c7e10;
+  color: white !important;
+  padding: 3px 10px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.logo img {
+  width: 176px;
+  margin-right: 40px;
+}
+
+.menu-links {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.menu-links a {
+  color: #dcdedf;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.menu-links a.active {
+  color: #1a9fff;
+  border-bottom: 2px solid #1a9fff;
+}
+
+/* BARRA AZUL */
+.sub-header {
+  background: rgba(28, 40, 53, 0.9);
+  height: 35px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sub-nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.sub-menu {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+}
+
+.sub-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.search-container {
+  display: flex;
+  background-color: #316282;
+  padding: 2px;
+}
+
+.search-container input {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  color: white;
+  font-style: italic;
+  outline: none;
+}
+
+.search-container button {
+  background-color: #66c0f4;
+  border: none;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+/* BANNER */
+.main-banner {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  line-height: 0;
+}
+
+.main-banner img {
+  width: 100%;
+  height: auto;
+}
+
+/* SECCIÓN DE DESTACADOS */
+.destacados {
+  margin-top: 30px;
+}
+
+.section-title {
+  font-size: 14px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.carousel-container-main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #0f1922;
+  min-height: 350px;
+}
+
+#carousel-content {
+  width: 100%;
+}
+
+.carousel-card {
+  display: flex;
+  width: 100%;
+  animation: fadeIn 0.4s ease;
+}
+
+.main-capsule {
+  flex: 2;
+  line-height: 0;
+}
+
+.main-capsule img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.info-side {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #0f1922;
+}
+
+.game-title {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.thumb img {
+  width: 100%;
+  height: auto;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.thumb img:hover {
+  opacity: 1;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* Flechas fijas */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100px;
+  width: 46px;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 10;
+  transition:
+    color 0.2s,
+    background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. GRADIENTE PARA TODAS LAS FLECHAS IZQUIERDAS */
+.prev,
+#prevOfferBtn {
+  left: -50px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8),
+    transparent
+  ) !important;
+}
+
+/* 3. GRADIENTE PARA TODAS LAS FLECHAS DERECHAS */
+.next,
+#nextOfferBtn {
+  right: -50px;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.8),
+    transparent
+  ) !important;
+}
+
+/* 4. EFECTO HOVER GLOBAL DE LAS FLECHAS */
+.arrow:hover {
+  color: white;
+}
+
+/* Dots */
+.carousel-dots {
+  text-align: center;
+  margin-top: 15px;
+}
+.dot {
+  height: 8px;
+  width: 12px;
+  background: #3d4450;
+  display: inline-block;
+  margin: 0 3px;
+  border-radius: 2px;
+}
+
+.dot.active {
+  background: #66c0f4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* SECCIÓN DE DESCUENTOS */
+
+.descuentos-seccion {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.header-with-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.btn-ver-mas {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  padding: 3px 12px;
+  font-size: 11px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: border 0.2s;
+}
+
+.btn-ver-mas:hover {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+
+.carousel-offers-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+.offers-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 160px);
+  gap: 12px;
+  width: 100%;
+}
+
+/* La primera tarjeta (izquierda) es grande y ocupa las 2 filas */
+.offer-card:nth-child(1) {
+  grid-row: span 2;
+}
+.offer-card:nth-child(2) {
+  grid-row: span 2;
+}
+
+/* Tarjeta individual */
+.offer-card {
+  background: #0f1922;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.offer-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bloque inferior de información - - POR MEJORAR*/
+.offer-info-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8) 20%, #000);
+}
+
+.offer-type {
+  color: #66c0f4;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+
+.discount-block {
+  display: flex;
+  background: #000;
+  width: fit-content;
+  height: 34px;
+}
+
+.discount-pct {
+  background: #4c6b22;
+  color: #beee11;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.discount-prices {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8px;
+  background: #344654; 
+}
+
+.price-old {
+  color: #70818d;
+  text-decoration: line-through;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.price-new {
+  color: #beee11;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+/* Flechas específicas para el carrusel inferior - CORRECCION MOMENTANEA*/
+.carousel-offers-wrapper .arrow {
+  background: rgba(0, 0, 0, 0.4);
+  width: 46px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#prevOfferBtn {
+  left: -50px;
+}
+#nextOfferBtn {
+  right: -50px;
+}
+
+/*seccion de listado de juegos - EN PROGRESO*/
+.tabbed-list-section {
+  margin-top: 20px;
+}
+
+.tabs-nav {
+  display: flex;
+  background: rgba(0, 0, 0, 0.4);
+  width: fit-content;
+}
+.tab-link {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: #c6d4df;
+  cursor: pointer;
+  font-size: 13px;
+}
+.tab-link.active {
+  background: #2a475e;
+  color: white;
+}
+
+.tabs-content-wrapper {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  min-height: 500px;
+}
+
+/* LISTA IZQUIERDA */
+.list-side {
+  flex: 1.5;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  margin-bottom: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.list-item:hover {
+  background: linear-gradient(to right, #c6d4df, #a3b0bd);
+  color: #1b2838;
+}
+
+.list-item img {
+  width: 120px;
+  height: 45px;
+  margin-right: 15px;
+}
+
+/* PANEL DERECHA */
+.preview-side {
+  flex: 1;
+  background: #416781;
+  padding: 15px;
+  color: #1b2838;
+}
+
+.preview-side h3 {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.preview-tags {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+.preview-tags span {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 5px;
+  font-size: 11px;
+}
+
+.preview-shots {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.preview-shots img {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}

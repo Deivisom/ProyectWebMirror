@@ -1,0 +1,236 @@
+[
+    {
+        "id": 1,
+        "title": "The Walking Trade",
+        "category": "destacados",
+        "main_image": "./img/img_games/WALKING-TRADE.png",
+        "screenshots": [
+            "./img/img_games/WALKING-TRADE-1.png",
+            "./img/img_games/WALKING-TRADE-2.png",
+            "./img/img_games/WALKING-TRADE-3.png",
+            "./img/img_games/WALKING-TRADE-4.png"
+        ],
+        "tag": "Lo más vendido",
+        "price": "9,99€"
+    },
+    {
+        "id": 2,
+        "title": "Ark Riders",
+        "category": "destacados",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "screenshots": [
+            "./img/img_games/ARK-RIDERS-1.png",
+            "./img/img_games/ARK-RIDERS-2.png",
+            "./img/img_games/ARK-RIDERS-3.png",
+            "./img/img_games/ARK-RIDERS-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 3,
+        "title": "Counter-Strike 2",
+        "category": "destacados",
+        "main_image": "./img/img_games/COUNTER-STRIKE2.png",
+        "screenshots": [
+            "./img/img_games/COUNTER-STRIKE2-1.png",
+            "./img/img_games/COUNTER-STRIKE2-2.png",
+            "./img/img_games/COUNTER-STRIKE2-3.png",
+            "./img/img_games/COUNTER-STRIKE2-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 4,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 5,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 6,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 7,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 8,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 9,
+        "title": "Resident Evil Requiem",
+        "category": "destacados",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "screenshots": [
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
+            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 10,
+        "title": "MEWGENICS",
+        "category": "destacados",
+        "main_image": "./img/img_games/MEWGENICS.png",
+        "screenshots": [
+            "./img/img_games/MEWGENICS-1.png",
+            "./img/img_games/MEWGENICS-2.png",
+            "./img/img_games/MEWGENICS-3.png",
+            "./img/img_games/MEWGENICS-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 11,
+        "title": "MEWGENICS",
+        "category": "destacados",
+        "main_image": "./img/img_games/MEWGENICS.png",
+        "screenshots": [
+            "./img/img_games/MEWGENICS-1.png",
+            "./img/img_games/MEWGENICS-2.png",
+            "./img/img_games/MEWGENICS-3.png",
+            "./img/img_games/MEWGENICS-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 12,
+        "title": "MEWGENICS",
+        "category": "destacados",
+        "main_image": "./img/img_games/MEWGENICS.png",
+        "screenshots": [
+            "./img/img_games/MEWGENICS-1.png",
+            "./img/img_games/MEWGENICS-2.png",
+            "./img/img_games/MEWGENICS-3.png",
+            "./img/img_games/MEWGENICS-4.png"
+        ],
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 13,
+        "title": "Ark Riders",
+        "category": "descuentos",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 14,
+        "title": "Ark Riders",
+        "category": "descuentos",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 15,
+        "title": "Ark Riders",
+        "category": "descuentos",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 16,
+        "title": "Ark Riders",
+        "category": "descuentos",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 17,
+        "title": "Ark Riders",
+        "category": "descuentos",
+        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    },
+    {
+        "id": 18,
+        "title": "Resident Evil Requiem",
+        "category": "descuentos",
+        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "discount": "-67%",
+        "original_price": "29,99€",
+        "final_price": "9,89€",
+        "tag": "Popular",
+        "price": "59,99€"
+    }
+]
