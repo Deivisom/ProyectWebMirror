@@ -1,7 +1,9 @@
 let featuredGames = [];
 let discountGames = [];
+let listGames = [];
 let currentIndex = 0;
 let offerIndex = 0;
+let listIndex = 0;
 
 const contentArea = document.getElementById("carousel-content");
 const dotsArea = document.getElementById("dots-container");
@@ -134,20 +136,18 @@ document.getElementById("prevOfferBtn").onclick = () => {
 /*seccion de listado de juegos- en progreso*/
 function renderTabbedList(filteredGames) {
   const listContainer = document.getElementById("main-games-list");
+  const listgame = listGames[listIndex];
 
-  listContainer.innerHTML = filteredGames
-    .map(
-      (game) => `
-        <div class="list-item" onmouseover="showPreview(${game.id})">
-            <img src="${game.main_image}">
+  listContainer.innerHTML = `
+        <div class="list-item" onmouseover="showPreview(${listgame.id})">
+            <img src="${listgame.main_image}">
             <div style="flex-grow: 1;">
-                <div class="game-name">${game.title}</div>
-                <div style="font-size: 11px; opacity: 0.7;">${game.tag}</div>
+                <div class="game-name">${listgame.title}</div>
+                <div style="font-size: 11px; opacity: 0.7;">${listgame.tag}</div>
             </div>
-            <div class="game-price">${game.price}</div>
+            <div class="game-price">${listgame.price}</div>
         </div>
-    `,
-    )
+    `
     .join("");
 
   
