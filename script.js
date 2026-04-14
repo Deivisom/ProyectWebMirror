@@ -1,6 +1,5 @@
 let featuredGames = [];
 let discountGames = [];
-let listGames = [];
 let currentIndex = 0;
 let offerIndex = 0;
 let listIndex = 0;
