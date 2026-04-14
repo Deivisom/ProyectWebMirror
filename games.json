@@ -1,236 +1,230 @@
 [
     {
         "id": 1,
-        "title": "The Walking Trade",
+        "title": "Cyberpunk 2077",
         "category": "destacados",
-        "main_image": "./img/img_games/WALKING-TRADE.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1091500/header.jpg",
         "screenshots": [
-            "./img/img_games/WALKING-TRADE-1.png",
-            "./img/img_games/WALKING-TRADE-2.png",
-            "./img/img_games/WALKING-TRADE-3.png",
-            "./img/img_games/WALKING-TRADE-4.png"
+            "https://cdn.steamstatic.com/steam/apps/1091500/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1091500/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1091500/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1091500/capsule_467x181.jpg"
         ],
         "tag": "Lo más vendido",
-        "price": "9,99€"
+        "price": "49,99€"
     },
     {
         "id": 2,
-        "title": "Ark Riders",
+        "title": "Grand Theft Auto V",
         "category": "destacados",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/271590/header.jpg",
         "screenshots": [
-            "./img/img_games/ARK-RIDERS-1.png",
-            "./img/img_games/ARK-RIDERS-2.png",
-            "./img/img_games/ARK-RIDERS-3.png",
-            "./img/img_games/ARK-RIDERS-4.png"
+            "https://cdn.steamstatic.com/steam/apps/271590/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/271590/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/271590/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/271590/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "39,99€"
     },
     {
         "id": 3,
-        "title": "Counter-Strike 2",
+        "title": "The Witcher 3: Wild Hunt",
         "category": "destacados",
-        "main_image": "./img/img_games/COUNTER-STRIKE2.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/292030/header.jpg",
         "screenshots": [
-            "./img/img_games/COUNTER-STRIKE2-1.png",
-            "./img/img_games/COUNTER-STRIKE2-2.png",
-            "./img/img_games/COUNTER-STRIKE2-3.png",
-            "./img/img_games/COUNTER-STRIKE2-4.png"
+            "https://cdn.steamstatic.com/steam/apps/292030/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/292030/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/292030/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/292030/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "19,99€"
     },
     {
         "id": 4,
-        "title": "Resident Evil Requiem",
+        "title": "Red Dead Redemption 2",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1174180/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/1174180/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1174180/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1174180/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1174180/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "49,99€"
     },
     {
         "id": 5,
-        "title": "Resident Evil Requiem",
+        "title": "Hades",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1145360/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/1145360/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1145360/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1145360/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/1145360/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "19,99€"
     },
     {
         "id": 6,
-        "title": "Resident Evil Requiem",
+        "title": "Stardew Valley",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/413150/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/413150/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/413150/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/413150/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/413150/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "14,99€"
     },
     {
         "id": 7,
-        "title": "Resident Evil Requiem",
+        "title": "Among Us",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/945360/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/945360/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/945360/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/945360/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/945360/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "4,99€"
     },
     {
         "id": 8,
-        "title": "Resident Evil Requiem",
+        "title": "Dota 2",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/570/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/570/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/570/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/570/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/570/capsule_467x181.jpg"
         ],
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "0,00€"
     },
     {
         "id": 9,
-        "title": "Resident Evil Requiem",
+        "title": "Counter-Strike 2",
         "category": "destacados",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/730/header.jpg",
         "screenshots": [
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-1.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-2.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-3.png",
-            "./img/img_games/RESIDENT-EVIL-REQUIEM-4.png"
+            "https://cdn.steamstatic.com/steam/apps/730/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/730/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/730/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/730/capsule_467x181.jpg"
         ],
         "tag": "Popular",
         "price": "59,99€"
     },
     {
         "id": 10,
-        "title": "MEWGENICS",
+        "title": "Assassin's Creed Valhalla",
         "category": "destacados",
-        "main_image": "./img/img_games/MEWGENICS.png",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/2208920/header.jpg",
         "screenshots": [
-            "./img/img_games/MEWGENICS-1.png",
-            "./img/img_games/MEWGENICS-2.png",
-            "./img/img_games/MEWGENICS-3.png",
-            "./img/img_games/MEWGENICS-4.png"
+            "https://cdn.steamstatic.com/steam/apps/2208920/capsule_231x87.jpg",
+            "https://cdn.steamstatic.com/steam/apps/2208920/capsule_184x69.jpg",
+            "https://cdn.steamstatic.com/steam/apps/2208920/capsule_616x353.jpg",
+            "https://cdn.steamstatic.com/steam/apps/2208920/header.jpg"
         ],
         "tag": "Popular",
         "price": "59,99€"
     },
     {
         "id": 11,
-        "title": "MEWGENICS",
-        "category": "destacados",
-        "main_image": "./img/img_games/MEWGENICS.png",
-        "screenshots": [
-            "./img/img_games/MEWGENICS-1.png",
-            "./img/img_games/MEWGENICS-2.png",
-            "./img/img_games/MEWGENICS-3.png",
-            "./img/img_games/MEWGENICS-4.png"
-        ],
+        "title": "Rocket League",
+        "category": "descuentos",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/252950/header.jpg",
+        "discount": "-50%",
+        "original_price": "39,99€",
+        "final_price": "19,99€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "39,99€"
     },
     {
         "id": 12,
-        "title": "MEWGENICS",
-        "category": "destacados",
-        "main_image": "./img/img_games/MEWGENICS.png",
-        "screenshots": [
-            "./img/img_games/MEWGENICS-1.png",
-            "./img/img_games/MEWGENICS-2.png",
-            "./img/img_games/MEWGENICS-3.png",
-            "./img/img_games/MEWGENICS-4.png"
-        ],
+        "title": "Elden Ring",
+        "category": "descuentos",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1245620/header.jpg",
+        "discount": "-40%",
+        "original_price": "69,99€",
+        "final_price": "41,99€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "69,99€"
     },
     {
         "id": 13,
-        "title": "Ark Riders",
+        "title": "Valheim",
         "category": "descuentos",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/892970/header.jpg",
+        "discount": "-30%",
+        "original_price": "19,99€",
+        "final_price": "13,99€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "19,99€"
     },
     {
         "id": 14,
-        "title": "Ark Riders",
+        "title": "Resident Evil 2",
         "category": "descuentos",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/278080/header.jpg",
+        "discount": "-20%",
+        "original_price": "39,99€",
+        "final_price": "31,99€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "39,99€"
     },
     {
         "id": 15,
-        "title": "Ark Riders",
+        "title": "FIFA 23",
         "category": "descuentos",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1811260/header.jpg",
+        "discount": "-25%",
+        "original_price": "69,99€",
+        "final_price": "52,49€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "69,99€"
     },
     {
         "id": 16,
-        "title": "Ark Riders",
+        "title": "Death Stranding",
         "category": "descuentos",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1190460/header.jpg",
+        "discount": "-35%",
+        "original_price": "59,99€",
+        "final_price": "38,99€",
         "tag": "Popular",
         "price": "59,99€"
     },
     {
         "id": 17,
-        "title": "Ark Riders",
+        "title": "Halo Infinite",
         "category": "descuentos",
-        "main_image": "./img/img_games/ARK-RIDERS.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/1240440/header.jpg",
+        "discount": "-15%",
+        "original_price": "59,99€",
+        "final_price": "50,99€",
         "tag": "Popular",
         "price": "59,99€"
     },
     {
         "id": 18,
-        "title": "Resident Evil Requiem",
+        "title": "Bioshock Infinite",
         "category": "descuentos",
-        "main_image": "./img/img_games/RESIDENT-EVIL-REQUIEM.png",
-        "discount": "-67%",
-        "original_price": "29,99€",
-        "final_price": "9,89€",
+        "main_image": "https://cdn.steamstatic.com/steam/apps/8870/header.jpg",
+        "discount": "-45%",
+        "original_price": "19,99€",
+        "final_price": "10,99€",
         "tag": "Popular",
-        "price": "59,99€"
+        "price": "19,99€"
     }
 ]
