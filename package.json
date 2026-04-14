@@ -1,0 +1,28 @@
+{
+  "name": "proyectwebmirror",
+  "version": "1.0.0",
+  "description": "- aceptar invitacion (mirad  vuestro correo)\r - Realizar git clone https://www.youtube.com/watch?v=4JEx9rVmecw\r - Cada uno realizara una pagina\r - Para acabar el prototipo solo realizaremos html y css\r - Antes de subir cambios, descarguen las últimas actualizaciones con git pull o sincronizar los cambios (en \"cambios\" pulsando los \"...\" y pulsar en \"pull,push\", -> \"sincronizar\")\r <img width=\"1034\" height=\"792\" alt=\"image\" src=\"https://github.com/user-attachments/assets/7597c0cd-4fc3-4500-a005-a24124d1165c\" />",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deivisom/ProyectWebMirror.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Deivisom/ProyectWebMirror/issues"
+  },
+  "homepage": "https://github.com/Deivisom/ProyectWebMirror#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.0"
+  }
+}

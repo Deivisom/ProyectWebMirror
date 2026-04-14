@@ -55,7 +55,7 @@ window.resetBigImage = function() {
    ========================================= */
 async function loadGames() {
     try {
-        const response = await fetch("games.json");
+        const response = await fetch("http://localhost:3000/api/games");
         allGames = await response.json(); 
         
         featuredGames = allGames.filter((game) => game.category === "destacados");
