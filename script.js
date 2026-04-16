@@ -14,7 +14,7 @@ let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
 const dotsArea = document.getElementById("dots-container");
 const searchInput = document.getElementById("search-input");
 
-const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="231" height="87"><rect width="100%" height="100%" fill="%23222"/><text x="50%" y="50%" fill="%23ccc" font-size="14" font-family="Arial" dominant-baseline="middle" text-anchor="middle"></text></svg>';
+const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22231%22%20height%3D%2287%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23222%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23ccc%22%20font-size%3D%2214%22%20font-family%3D%22Arial%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E';
 
 // Función para mostrar secciones dinámicamente
 function showSection(section) {

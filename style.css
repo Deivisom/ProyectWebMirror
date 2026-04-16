@@ -70,8 +70,8 @@ body {
 .main-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .logo img {
@@ -83,6 +83,7 @@ body {
   display: flex;
   list-style: none;
   gap: 15px;
+  align-items: center;
 }
 
 .menu-links a {
@@ -90,11 +91,91 @@ body {
   text-decoration: none;
   font-weight: bold;
   font-size: 14px;
+  text-transform: uppercase;
+  transition: color 0.1s;
+}
+
+.menu-links a:hover {
+  color: #fff;
 }
 
 .menu-links a.active {
   color: #1a9fff;
   border-bottom: 2px solid #1a9fff;
+  padding-bottom: 2px;
+}
+
+.profile-top-actions {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 15px;
+}
+
+.btn-install-modern {
+  background-color: #5c7e10;
+  color: #e5e4e4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  text-decoration: none;
+  font-size: 13px;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+.btn-install-modern:hover {
+  background-color: #8cbb19;
+  color: white;
+}
+
+.notification-bell {
+  background: #3d4450;
+  padding: 6px 8px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.notification-bell:hover {
+  background: #66c0f4;
+}
+
+.profile-info-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  line-height: 1.3;
+}
+
+.profile-info-header .profile-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #dcdedf;
+  cursor: pointer;
+}
+
+.profile-info-header .profile-name:hover {
+  color: #fff;
+}
+
+.profile-info-header .wallet-balance {
+  font-size: 11px;
+  color: #66c0f4;
+}
+
+.top-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
 /* BARRA AZUL */
@@ -114,36 +195,72 @@ body {
 .sub-menu {
   display: flex;
   list-style: none;
-  gap: 15px;
+  gap: 20px;
 }
 
 .sub-menu a {
-  color: white;
+  color: #e5e4e4;
   text-decoration: none;
   font-size: 12px;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+}
+.sub-menu a:hover {
+  color: #fff;
+}
+
+.sub-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wishlist-link {
+  display: flex;
+  align-items: center;
+  color: #e5e4e4;
+  cursor: pointer;
+}
+.wishlist-link:hover {
+  color: white;
+}
+.wishlist-link a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
 }
 
 .search-container {
   display: flex;
   background-color: #316282;
-  padding: 2px;
+  border-radius: 3px;
+  overflow: hidden;
+  height: 27px;
 }
 
 .search-container input {
   background: transparent;
   border: none;
-  padding: 4px 10px;
+  padding: 0 10px;
   color: white;
   font-style: italic;
+  font-size: 12px;
   outline: none;
+  width: 180px;
 }
 
 .search-container button {
   background-color: #66c0f4;
   border: none;
-  padding: 0 8px;
+  padding: 0 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container button:hover {
+  background-color: #79cbf9;
 }
 
 /* BANNER */
