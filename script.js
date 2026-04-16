@@ -15,10 +15,10 @@ async function loadGames() {
     const allGames = await response.json();
     featuredGames = allGames.filter((game) => game.category === "destacados");
     discountGames = allGames.filter((g) => g.category === "descuentos");
-
+    listGames = allGames.filter((ga) => ga.category === "descuentos" || ga.category === "destacados");
     renderFeatured();
     renderDiscounts();
-    renderTabbedList(allGames);
+    renderTabbedList();
   } catch (error) {
     console.error("Error cargando el JSON:", error);
   }
@@ -29,11 +29,12 @@ function renderFeatured() {
   const contentArea = document.getElementById("carousel-content");
 
   //cambia la imagen principal al pasar el mouse por las miniaturas
+  //cambiar para que al quitarse el mouse vuelva a la imagen principal original
   const thumbsHTML = game.screenshots
     .map(
       (img) => `
         <div class="thumb">
-            <img src="${img}" onmouseover="document.getElementById('main-img').src='${img}'">
+            <img src="${img}" onmouseover="document.getElementById('main-img').src='${img}'" onmouseout="document.getElementById('main-img').src='${game.main_image}'">
         </div>
     `,
     )
@@ -135,8 +136,9 @@ document.getElementById("prevOfferBtn").onclick = () => {
 
 /*seccion de listado de juegos- en progreso*/
 function renderTabbedList(filteredGames) {
-  const listContainer = document.getElementById("main-games-list");
   const listgame = listGames[listIndex];
+  const listContainer = document.getElementById("main-games-list");
+  
 
   listContainer.innerHTML = `
         <div class="list-item" onmouseover="showPreview(${listgame.id})">
