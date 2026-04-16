@@ -222,11 +222,30 @@ window.showPreview = function (id) {
 /* =========================================
    LÓGICA DE CARRITO Y FAVORITOS (LOCALSTORAGE)
    ========================================= */
+window.updateCartUI = function() {
+    const cartBtn = document.getElementById("cart-button");
+    const countSpan = document.getElementById("cart-count");
+    if (cartBtn && countSpan) {
+        if (cart.length > 0) {
+            cartBtn.style.display = "flex";
+            countSpan.textContent = " " + cart.length;
+        } else {
+            cartBtn.style.display = "none";
+        }
+    }
+};
+
+// Initial cart UI render
+window.addEventListener('DOMContentLoaded', () => {
+    window.updateCartUI();
+});
+
 window.addToCart = function(id) {
     const game = allGames.find(g => g.id === id);
     if (game && !cart.some(item => item.id === id)) {
         cart.push(game);
         localStorage.setItem("steam_cart", JSON.stringify(cart));
+        window.updateCartUI();
         alert(`${game.title} añadido al carrito`);
     } else {
         alert("Este juego ya está en tu carrito");
