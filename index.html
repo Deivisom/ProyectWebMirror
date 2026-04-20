@@ -9,45 +9,67 @@
   </head>
   <body>
     <header class="top-header">
-      <div class="container top-bar">
-        <div class="install-section">
-          <a href="#" class="btn-install">Instalar Steam</a>
-          <a href="#">iniciar sesión</a> | <a href="#">idioma</a>
-        </div>
-      </div>
       <div class="container main-nav">
         <div class="logo">
-            <!--se busco una manera para insertar la imagen original-->
           <img
             src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
             alt="Steam"
           />
         </div>
         <ul class="menu-links">
-          <li><a href="#" class="active">TIENDA</a></li>
+          <li><a href="#" onclick="showSection('store')" class="active">TIENDA</a></li>
           <li><a href="#">COMUNIDAD</a></li>
-          <li><a href="#">ACERCA DE</a></li>
+          <li><a href="#" onclick="showSection('profile')">AKN.RAOUIA</a></li>
+          <li><a href="#">CHAT</a></li>
           <li><a href="#">SOPORTE</a></li>
         </ul>
+        <div class="profile-top-actions">
+          <a href="#" class="btn-install-modern">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve"><polygon fill="#e5e4e4" points="10,0 6,0 6,5 3,5 8,11 13,5 10,5 "/><rect x="2" y="13" fill="#e5e4e4" width="12" height="2"/></svg>
+            Instalar Steam
+          </a>
+          <div class="notification-bell">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve"><path fill="#e5e4e4" d="M14.5,11.5L13,10V6c0-2.8-2.2-5-5-5S3,3.2,3,6v4L1.5,11.5c-0.3,0.3-0.5,0.7-0.5,1.1C1,13.4,1.6,14,2.4,14 h11.1C14.4,14,15,13.4,15,12.6C15,12.2,14.8,11.8,14.5,11.5z M8,16c1.1,0,2-0.9,2-2H6C6,15.1,6.9,16,8,16z"/></svg>
+          </div>
+          <div class="profile-info-header">
+            <span class="profile-name">akn.raouia ▾</span>
+            <span class="wallet-balance">0,49€</span>
+          </div>
+          <img src="./img/profile/benny.jpg" class="top-avatar" onclick="showSection('profile')" alt="Perfil">
+        </div>
       </div>
     </header>
 
     <nav class="sub-header">
       <div class="container sub-nav-content">
         <ul class="sub-menu">
-          <li><a href="#">Explorar</a></li>
-          <li><a href="#">Recomendaciones</a></li>
-          <li><a href="#">Categorías</a></li>
-          <li><a href="#">Hardware</a></li>
-          <li><a href="#">Noticias</a></li>
+          <li><a href="#">Explorar ▾</a></li>
+          <li><a href="#">Recomendaciones ▾</a></li>
+          <li><a href="#">Categorías ▾</a></li>
+          <li><a href="#">Hardware ▾</a></li>
+          <li><a href="#">Formas de Jugar ▾</a></li>
+          <li><a href="#">Más ▾</a></li>
         </ul>
-        <div class="search-container">
-          <input type="text" placeholder="buscar en la tienda" />
-          <button>buscar</button>
+        <div class="sub-header-right">
+          <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar en la tienda">
+            <button id="search-button">
+               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 100 100"><path fill="#ffffff" d="M94.4,85.6l-21-21c5.2-6.6,8.2-14.8,8.2-23.7C81.6,18.3,63.3,0,40.8,0S0,18.3,0,40.8S18.3,81.6,40.8,81.6c8.9,0,17.1-3,23.7-8.2l21,21c1.2,1.2,3.1,1.2,4.3,0l4.3-4.3C95.6,88.7,95.6,86.8,94.4,85.6z M40.8,69.5c-15.8,0-28.7-12.9-28.7-28.7 S25,12.1,40.8,12.1S69.5,25,69.5,40.8S56.6,69.5,40.8,69.5z"/></svg>
+            </button>
+          </div>
+          <div class="wishlist-link">
+             <span style="font-size: 14px; margin-right: 5px;">★</span>
+             <a href="lista_favoritos.html">Lista de deseados</a>
+          </div>
+          <a href="carrito_compra.html" class="btn-cart" id="cart-button" style="display: none;">
+             <svg width="14" height="14" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l.89-4.5H4.002L3.102 4z"/><path d="M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+             Carro <span id="cart-count"></span>
+          </a>
         </div>
       </div>
     </nav>
 
+    <div id="store-section">
     <main class="container-banner">
       <section class="main-banner">
         <img src="./img/img_nav/banner.png" alt="Ofertas Square Enix" />
@@ -104,12 +126,6 @@
       </div>
     </section>
 
-
-
-
-
-
-
     <!--footer-->
     <footer class="main-footer">
     <div class="container footer-cta">
@@ -157,5 +173,277 @@
         </div>
     </div>
 </footer>
+
+    </div> <!-- end store-section -->
+
+      <!-- Profile Section -->
+    <div id="profile-section" style="display: none;">
+        <div class="main-wrapper">
+            <div class="container profile-wrapper">
+                <div class="profile-hero">
+                    <div class="profile-hero-left">
+                        <div class="avatar-frame">
+                            <img class="main-avatar" src="./img/profile/benny.jpg" alt="Imagen de perfil">
+                        </div>
+                        <div class="profile-info">
+                            <div class="persona-name-group">
+                                <h2 class="persona-name">akn.raouia</h2>
+                                <span class="persona-arrow">▾</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-hero-right">
+                        <div class="level-box">
+                            <div class="level-box-top">
+                                <span class="hero-label">Nivel</span>
+                                <div class="level-circle">5</div>
+                            </div>
+                            <div class="hero-note-container">
+                                <p class="hero-note">Puedes destacar una de tus insignias aquí.<br>Selecciona una en la página de <a href="#" style="color:white;font-weight:bold;text-decoration:none;">edición del perfil</a>.</p>
+                            </div>
+                            <div class="hero-action">
+                                <button class="edit-profile">Modificar perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-layout">
+                    <div class="left-col">
+                        <div class="content-box recent-activity-box">
+                            <div class="section-header-row">
+                                <h3 class="section-title">Actividad reciente</h3>
+                                <span class="recent-hours">4.1 h en estas 2 semanas</span>
+                            </div>
+
+                            <div class="game-item">
+                                <img src="./img/profile/fivem.jpg" class="game-header-img" onerror="this.src='https://cdn.cloudflare.steamstatic.com/steam/apps/1172470/header.jpg'">
+                                <div class="game-info">
+                                    <h4>FiveM</h4>
+                                    <div class="game-stats-container">
+                                        <p class="game-stats">98 h registradas</p>
+                                        <span class="last-session">última sesión: 12 ABR</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-item">
+                                <img src="./img/profile/images.jpg" class="game-header-img" onerror="this.src='./img/profile/benny.jpg'">
+                                <div class="game-info">
+                                    <h4>R.E.P.O.</h4>
+                                    <div class="game-stats-container">
+                                        <p class="game-stats">7.4 h registradas</p>
+                                        <span class="last-session">última sesión: 2 ABR</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="game-item">
+                                <img src="https://gcdn.thunderstore.io/live/repository/icons/Maid_Company-ARC_Raiders_Mask-1.0.1.png.128x128_q95.png" class="game-header-img" onerror="this.src='./img/img_nav/banner.png';">
+                                <div class="game-info">
+                                    <h4>ARC Raiders</h4>
+                                    <div class="game-stats-container">
+                                        <p class="game-stats">7.8 h registradas</p>
+                                        <span class="last-session">última sesión: 30 MAR</span>
+                                    </div>
+                                    <div class="achievement-row">
+                                        <div class="achievement-label">
+                                            <span>Avance en los logros</span>
+                                            <span class="achievement-count">13 de 50</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 26%;"></div>
+                                        </div>
+                                        <div class="achievement-icons">
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/c30b201a4e2efde5122dfb239d2243d4cddbed70.jpg"></div>
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/36bda19a9a5f492b9ddfcf3dc7d84813efca0fdf.jpg"></div>
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/dcaee52cde3a64797d195f2d0115b0c950c4bb21.jpg"></div>
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/aed94eef4690f05eaae29f6de31102dbd6ec0364.jpg"></div>
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/8a7199ecb916ae8cf2be7f739077ceb7ad026df3.jpg"></div>
+                                            <div class="ach-icon"><img src="https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/1172470/c30b201a4e2efde5122dfb239d2243d4cddbed70.jpg"></div>
+                                            <div class="ach-more">+8</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="view-recent">
+                                <a href="#">Ver <span>Recientes</span></a>
+                            </div>
+                        </div>
+
+                        <div class="content-box comments-box">
+                            <div class="section-header-row">
+                                <h3 class="section-title">Comentarios</h3>
+                                <span class="subscribe-text"><input type="checkbox" checked> Suscribirse al hilo <sup>[?]</sup></span>
+                            </div>
+                            <div class="comment-input-area">
+                                <img src="./img/profile/benny.jpg" class="my-comment-avatar">
+                                <div class="comment-input-wrapper">
+                                    <div class="comment-box-ph">Añadir un comentario</div>
+                                </div>
+                            </div>
+                            
+                            <div class="blocked-comment-notice">
+                                <div class="blocked-box"></div>
+                                <span class="blocked-text">Has bloqueado a este Jugador</span>
+                                <a href="#" class="blocked-link">ver este comentario</a>
+                            </div>
+
+                            <div class="comment-list">
+                                <div class="comment-item">
+                                    <img src="./img/profile/elena.jpg" class="comment-avatar">
+                                    <div class="comment-content">
+                                        <div class="comment-header-row">
+                                            <a href="#" class="comment-author">!Nicolau</a> 
+                                            <span class="comment-date">12 FEB 2025 a las 16:43</span>
+                                        </div>
+                                        <p class="comment-text">hola soy nico!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-col">
+                        <div class="online-status-box">
+                            <h3 class="online-status">En línea</h3>
+                        </div>
+
+                        <div class="content-box side-box badges-side-box">
+                            <h3 class="section-title section-title-right">Insignias <span class="count-badge">5</span></h3>
+                            <div class="badges-row">
+                                <div class="badge-icon round-badge-gold"></div>
+                                <div class="badge-icon box-badge purple-badge">10+</div>
+                                <div class="badge-icon box-badge red-badge">2025</div>
+                                <div class="badge-icon box-badge border-badge">1</div>
+                            </div>
+                        </div>
+
+                        <div class="content-box side-box vertical-menu">
+                            <a href="#" class="s-link">Juegos <span class="count-badge">16</span></a>
+                            <a href="#" class="s-link">Inventario</a>
+                            <a href="#" class="s-link">Capturas</a>
+                            <a href="#" class="s-link">Videos</a>
+                            <a href="#" class="s-link">Artículos del Workshop</a>
+                            <a href="#" class="s-link">Reseñas</a>
+                            <a href="#" class="s-link">Guías</a>
+                            <a href="#" class="s-link">Material gráfico</a>
+                        </div>
+
+                        <div class="content-box side-box friends-box">
+                            <h3 class="section-title section-title-right">Amigos <span class="count-badge">24</span></h3>
+                            
+                            <div class="friend-item">
+                                <div class="friend-avatar-wrap">
+                                    <img src="./img/profile/elena.jpg" class="friend-avatar">
+                                    <div class="friend-status-bar blue-status"></div>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="name">!Nicolau</span>
+                                    <span class="status">Última conexión: hace 10 h 52 min</span>
+                                </div>
+                                <div class="friend-level-circle blue-level">56</div>
+                            </div>
+                            
+                            <div class="friend-item">
+                                <div class="friend-avatar-wrap">
+                                    <img src="./img/profile/bridg.jpg" class="friend-avatar">
+                                    <div class="friend-status-bar blue-status"></div>
+                                </div>
+                                <div class="friend-info">
+                                    <span class="name online-text">Uta</span>
+                                    <span class="status online-text">en línea</span>
+                                </div>
+                                <div class="friend-level-circle red-level">25</div>
+                            </div>
+
+                            <div class="friend-item">
+                                <div class="friend-avatar-wrap">
+                                    <img src="./img/profile/blair.jpg" class="friend-avatar">
+                                </div>
+                                <div class="friend-info">
+                                    <span class="name">KAI KOTFIRO</span>
+                                    <span class="status">Última conexión: hace 1 h 1 min</span>
+                                </div>
+                                <div class="friend-level-circle red-level">25</div>
+                            </div>
+
+                            <div class="friend-item">
+                                <div class="friend-avatar-wrap">
+                                    <img src="./img/profile/fivem.jpg" class="friend-avatar">
+                                </div>
+                                <div class="friend-info">
+                                    <span class="name">INLOVE4</span>
+                                    <span class="status">Última conexión: hace 7 h 8 min</span>
+                                </div>
+                                <div class="friend-level-circle red-level">15</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="steam-footer">
+                <img src="./img/profile/valve.jpg" class="valve-logo">
+                <p>© Valve Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países.</p>
+                <div class="footer-links">
+                    <a href="#">Política de Privacidad</a> | <a href="#">Información legal</a> | <a href="#">Acuerdo de Suscriptor a Steam</a> | <a href="#">Cookies</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!--footer-->
+    <footer class="main-footer">
+    <div class="container footer-cta">
+        <p>¿Buscando recomendaciones?</p>
+        <p class="sub-cta">Inicia sesión para ver recomendaciones personalizadas</p>
+        <a href="#" class="btn-login-footer">Iniciar sesión</a>
+        <p class="register-text">O <a href="#">regístrate</a> y únete a Steam de forma gratuita</p>
+    </div>
+
+    <div class="footer-legal">
+        <div class="container">
+            <hr class="footer-separator">
+            <div class="legal-content">
+                <div class="legal-logos">
+                    <!--añadir imágenes de los logos-->
+                    <img src="" alt="Valve" class="logo-valve">
+                    <img src="" alt="Steam" class="logo-steam">
+                </div>
+                <div class="legal-text">
+                    <p>© 2026 Valve Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños en EE. UU. y otros países.</p>
+                    <p>Todos los precios incluyen IVA (donde sea aplicable). 
+                        <a href="#">Política de Privacidad</a> | 
+                        <a href="#">Información legal</a> | 
+                        <a href="#">Accesibilidad</a> | 
+                        <a href="#">Acuerdo de Suscriptor a Steam</a> | 
+                        <a href="#">Reembolsos</a> | 
+                        <a href="#">Cookies</a>
+                    </p>
+                </div>
+            </div>
+            <hr class="footer-separator">
+            <div class="footer-links-bottom">
+                <a href="#">Acerca de Valve</a> | 
+                <a href="#">Empleo</a> | 
+                <a href="#">Steamworks</a> | 
+                <a href="#">Distribución de Steam</a> | 
+                <a href="#">Soporte</a> | 
+                <a href="#">Reciclaje</a> | 
+                <a href="#">Tarjetas regalo</a>
+                <span class="social-links">
+                    <!-- buscar iconos acorde-->
+                    <a href="#">f</a> <a href="#">X</a> <a href="#"></a>
+                </span>
+            </div>
+        </div>
   </body>
 </html>

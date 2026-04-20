@@ -1,11 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carrito de Compras - Steam</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    oaaa
+    <header class="top-header">
+        <div class="container top-bar">
+            <div class="install-section">
+                <a href="#" class="btn-install">Instalar Steam</a>
+                <a href="#">iniciar sesión</a> | <a href="#">idioma</a>
+            </div>
+        </div>
+        <div class="container main-nav">
+            <div class="logo">
+                <img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam">
+            </div>
+            <ul class="menu-links">
+                <li><a href="index.html">TIENDA</a></li>
+                <li><a href="#">COMUNIDAD</a></li>
+                <li><a href="#">ACERCA DE</a></li>
+                <li><a href="#">SOPORTE</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 20px;">
+        <h1>Tu Carrito de Compras</h1>
+        <div id="cart-container">
+            <!-- Los juegos del carrito se cargarán aquí -->
+        </div>
+        <div id="cart-total" style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            <!-- Total se mostrará aquí -->
+        </div>
+        <button id="checkout-btn" style="margin-top: 20px; padding: 10px 20px; background: #66c0f4; color: white; border: none; border-radius: 2px; cursor: pointer;">Proceder al Pago</button>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-cta">
+            <p>¿Buscando recomendaciones?</p>
+            <p class="sub-cta">Inicia sesión para ver recomendaciones personalizadas</p>
+            <a href="#" class="btn-login-footer">Iniciar sesión</a>
+            <p class="register-text">O <a href="#">regístrate</a> y únete a Steam de forma gratuita</p>
+        </div>
+    </footer>
+
+    <script>
+        // Cargar carrito desde localStorage
+        let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
+
+        function renderCart() {
+            const cartContainer = document.getElementById("cart-container");
+            const cartTotal = document.getElementById("cart-total");
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = "<p>Tu carrito está vacío.</p>";
+                cartTotal.innerHTML = "";
+                return;
+            }
+
+            let total = 0;
+            cartContainer.innerHTML = cart.map(game => {
+                const price = parseFloat(game.price.replace('€', '').replace(',', '.'));
+                total += price;
+                return `
+                    <div class="cart-item" style="display: flex; align-items: center; margin-bottom: 15px; padding: 10px; border: 1px solid #ddd;">
+                        <img src="${game.main_image}" style="width: 80px; height: 80px; margin-right: 15px;">
+                        <div style="flex-grow: 1;">
+                            <h3>${game.title}</h3>
+                            <p>${game.price}</p>
+                        </div>
+                        <button onclick="removeFromCart(${game.id})" style="padding: 5px 10px; background: #c33; color: white; border: none; cursor: pointer;">Eliminar</button>
+                    </div>
+                `;
+            }).join("");
+
+            cartTotal.innerHTML = `Total: ${total.toFixed(2)}€`;
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(game => game.id !== id);
+            localStorage.setItem("steam_cart", JSON.stringify(cart));
+            renderCart();
+        }
+
+        document.getElementById("checkout-btn").onclick = () => {
+            alert("Funcionalidad de pago no implementada aún.");
+        };
+
+        // Cargar carrito al iniciar
+        renderCart();
+    </script>
 </body>
 </html>
