@@ -132,7 +132,8 @@ function renderDiscounts() {
                 <img src="${game.main_image}">
             </div>
             <div class="offer-info-box">
-                ${index < 2 ? '<p class="offer-type">OFERTA DE ENTRE SEMANA</p>' : ""}
+            
+                ${index < 2 ? '<p class="offer-type">OFERTA DE ENTRE SEMANA</p>' : " <p class='offer-type'>OFERTA DEL DÍA</p>"}
                 <div class="discount-block">
                     <div class="discount-pct">${game.discount}</div>
                     <div class="discount-prices">
