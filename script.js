@@ -134,7 +134,7 @@ function renderDiscounts() {
         const offerClass = isMidweek ? "offer-midweek" : "offer-daily";
         const offerTitle = isMidweek ? "OFERTA DE ENTRE SEMANA" : "OFERTA DEL DÍA";
         return `
-        <div class="offer-card ${offerClass}">
+        <div class="offer-card ${offerClass}" onmouseenter="showGameTooltip(event, ${game.id})" onmouseleave="hideGameTooltip()">
             <div class="offer-image-container">
                 <img src="${game.main_image}">
             </div>
@@ -327,4 +327,80 @@ window.filterTabs = function(category) {
             filteredGames = allGames;
     }
     renderTabbedList(filteredGames);
+};
+
+/* =========================================
+   TOOLTIP GLOBAL DE JUEGOS
+   ========================================= */
+let tooltipInterval;
+let tooltipContainer = null;
+
+window.showGameTooltip = function(event, gameId) {
+    if (!tooltipContainer) {
+        tooltipContainer = document.createElement("div");
+        tooltipContainer.id = "global-game-tooltip";
+        tooltipContainer.className = "game-hover-tooltip";
+        document.body.appendChild(tooltipContainer);
+    }
+
+    const game = allGames.find(g => g.id === gameId);
+    if (!game) return;
+
+    let shotIndex = 0;
+    const maxShots = game.screenshots ? game.screenshots.length : 0;
+    const firstShot = maxShots > 0 ? game.screenshots[0] : game.main_image;
+
+    tooltipContainer.innerHTML = `
+        <div class="tooltip-content">
+            <h4 class="tooltip-title">${game.title}</h4>
+            <div class="tooltip-shot-container">
+                <img id="tooltip-shot" src="${firstShot}" alt="Screenshot">
+            </div>
+            <div class="tooltip-reviews">
+                Reseñas en Español de España <br>
+                <span class="review-status">Extremadamente positivas</span> (11,205 reseñas)
+            </div>
+        </div>
+    `;
+
+    tooltipContainer.style.display = "block";
+    tooltipContainer.style.opacity = 1;
+
+    // Posicionar relativo al elemento que dispara el evento
+    const rect = event.currentTarget.getBoundingClientRect();
+    
+    let left = rect.right + window.scrollX + 15;
+    let top = rect.top + window.scrollY;
+
+    // Si se sale por la derecha, mostrar a la izquierda
+    if (left + 320 > window.innerWidth) {
+        left = rect.left + window.scrollX - 335;
+    }
+    
+    // Si se sale por abajo
+    if (top + 250 > window.innerHeight + window.scrollY) {
+        top = window.innerHeight + window.scrollY - 260;
+    }
+
+    tooltipContainer.style.top = top + "px";
+    tooltipContainer.style.left = left + "px";
+
+    clearInterval(tooltipInterval);
+    if (maxShots > 1) {
+        tooltipInterval = setInterval(() => {
+            shotIndex = (shotIndex + 1) % maxShots;
+            const imgEl = document.getElementById("tooltip-shot");
+            if (imgEl) {
+                imgEl.src = game.screenshots[shotIndex];
+            }
+        }, 1500); 
+    }
+};
+
+window.hideGameTooltip = function() {
+    if (tooltipContainer) {
+        tooltipContainer.style.display = "none";
+        tooltipContainer.style.opacity = 0;
+        clearInterval(tooltipInterval);
+    }
 };

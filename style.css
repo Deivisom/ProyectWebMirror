@@ -1573,3 +1573,53 @@ body {
     filter: opacity(0.5);
     margin-bottom: 10px;
 }
+
+/* Tooltip Global para Juegos (Steam Hover Like) */
+.game-hover-tooltip {
+    position: absolute;
+    width: 320px;
+    background-color: #e2e4e6; /* Blanco griseaso */
+    color: #171a21;
+    border-radius: 4px;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: none;
+    padding: 15px;
+    pointer-events: none; /* muy importante para no robar el hover y crear parpadeos */
+    transition: opacity 0.1s;
+    opacity: 0;
+}
+
+.tooltip-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tooltip-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #171a21;
+    font-weight: bold;
+}
+
+.tooltip-shot-container img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.tooltip-reviews {
+    font-size: 11px;
+    color: #2b3340;
+    line-height: 1.4;
+    background: #cdd1d5;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.tooltip-reviews .review-status {
+    color: #1a9fff; /* Azul Steam ajustado para contraste con blanco griseaso */
+    font-weight: bold;
+}
