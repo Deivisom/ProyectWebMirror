@@ -11,7 +11,6 @@ let offerIndex = 0;
 let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
 let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
 
-const dotsArea = document.getElementById("dots-container");
 const searchInput = document.getElementById("search-input");
 
 const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22231%22%20height%3D%2287%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23222%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23ccc%22%20font-size%3D%2214%22%20font-family%3D%22Arial%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E';
@@ -108,14 +107,18 @@ function renderFeatured() {
             </div>
         </div>
     `;
-    updateDots();
+    updateDots("dots-container", currentIndex, featuredGames.length);
 }
 
-function updateDots() {
-    if (!dotsArea) return;
-    dotsArea.innerHTML = featuredGames
-        .map((_, i) => `<span class="dot ${i === currentIndex ? "active" : ""}"></span>`)
-        .join("");
+function updateDots(containerId, activeIndex, totalDots) {
+    const dotsContainer = document.getElementById(containerId);
+    if (!dotsContainer) return;
+    
+    let dotsHTML = "";
+    for (let i = 0; i < totalDots; i++) {
+        dotsHTML += `<span class="dot ${i === activeIndex ? "active" : ""}"></span>`;
+    }
+    dotsContainer.innerHTML = dotsHTML;
 }
 
 /* =========================================
@@ -126,14 +129,17 @@ function renderDiscounts() {
     if (!container) return;
     const visibleOffers = discountGames.slice(offerIndex, offerIndex + 4);
 
-    container.innerHTML = visibleOffers.map((game, index) => `
-        <div class="offer-card">
+    container.innerHTML = visibleOffers.map((game, index) => {
+        const isMidweek = index < 2;
+        const offerClass = isMidweek ? "offer-midweek" : "offer-daily";
+        const offerTitle = isMidweek ? "OFERTA DE ENTRE SEMANA" : "OFERTA DEL DÍA";
+        return `
+        <div class="offer-card ${offerClass}">
             <div class="offer-image-container">
                 <img src="${game.main_image}">
             </div>
             <div class="offer-info-box">
-            
-                ${index < 2 ? '<p class="offer-type">OFERTA DE ENTRE SEMANA</p>' : " <p class='offer-type'>OFERTA DEL DÍA</p>"}
+                <p class="offer-type">${offerTitle}</p>
                 <div class="discount-block">
                     <div class="discount-pct">${game.discount}</div>
                     <div class="discount-prices">
@@ -143,7 +149,10 @@ function renderDiscounts() {
                 </div>
             </div>
         </div>
-    `).join("");
+        `;
+    }).join("");
+    
+    updateDots("dots-offers-container", Math.floor(offerIndex / 4), Math.ceil(discountGames.length / 4));
 }
 
 /* =========================================
