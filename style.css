@@ -10,8 +10,14 @@ body {
   color: #c6d4df;
 }
 
-/* EL CONTENEDOR MAESTRO (940px es la clave) */
+/* EL CONTENEDOR MAESTRO (1200px para mayor ancho como Steam) */
 .container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* CONTENEDOR PARA STORE SECTION (940px) */
+.container-store {
   width: 940px;
   margin: 0 auto;
 }
@@ -90,7 +96,7 @@ body {
   color: #dcdedf;
   text-decoration: none;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   text-transform: uppercase;
   transition: color 0.1s;
 }
@@ -181,7 +187,7 @@ body {
 /* BARRA AZUL */
 .sub-header {
   background: rgba(28, 40, 53, 0.9);
-  height: 35px;
+  height: 45px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -201,7 +207,8 @@ body {
 .sub-menu a {
   color: #e5e4e4;
   text-decoration: none;
-  font-size: 12px;
+  font-weight: bold;
+  font-size: 13px;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
@@ -254,18 +261,28 @@ body {
   background-color: #316282;
   border-radius: 3px;
   overflow: hidden;
-  height: 27px;
+  height: 29px;
 }
 
 .search-container input {
   background: transparent;
   border: none;
   padding: 0 10px;
-  color: white;
+  color: #ffffff;
   font-style: italic;
   font-size: 12px;
   outline: none;
-  width: 180px;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.search-container input::placeholder {
+  color: #b8b6b4;
+  transition: color 0.3s ease;
+}
+
+.search-container input:hover::placeholder {
+  color: #ffffff;
 }
 
 .search-container button {
