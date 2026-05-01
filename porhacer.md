@@ -7,4 +7,5 @@
 - [ hacer que funcione el registro ] 
 - [ hacer que funcione el perfil ] 
 - [ visualizar los juegos en grande al darle click ]
+- [que cuando refresque la pagian en perfil por ejemplo no me devuelva a la tienda] 
 
