@@ -1,7 +1,7 @@
 /* =========================================
    VARIABLES GLOBALES Y ESTADO
    ========================================= */
-let allGames = []; 
+let allGames = [];
 let featuredGames = [];
 let discountGames = [];
 let currentIndex = 0;
@@ -21,28 +21,40 @@ function showSection(section) {
     const profileSection = document.getElementById('profile-section');
     const menuLinks = document.querySelectorAll('.menu-links a');
     const subHeader = document.querySelector('.sub-header');
+    const footerCta = document.querySelector('.footer-cta');
+
+    // Update URL hash
+    window.location.hash = section;
 
     if (section === 'store') {
         storeSection.style.display = 'block';
         profileSection.style.display = 'none';
         if (subHeader) subHeader.style.display = 'flex';
+        if (footerCta) footerCta.style.display = 'block';
+        const footer = document.querySelector('.main-footer');
+        if (footer) footer.classList.remove('profile-mode');
         menuLinks.forEach(link => link.classList.remove('active'));
-        document.querySelector('.menu-links a[onclick*="store"]').classList.add('active');
+        const activeLink = document.querySelector('.menu-links a[onclick*="store"]');
+        if (activeLink) activeLink.classList.add('active');
     } else if (section === 'profile') {
         storeSection.style.display = 'none';
         profileSection.style.display = 'block';
         if (subHeader) subHeader.style.display = 'none';
+        if (footerCta) footerCta.style.display = 'none';
+        const footer = document.querySelector('.main-footer');
+        if (footer) footer.classList.add('profile-mode');
         menuLinks.forEach(link => link.classList.remove('active'));
-        document.querySelector('.menu-links a[onclick*="profile"]').classList.add('active');
+        const activeLink = document.querySelector('.menu-links a[onclick*="profile"]');
+        if (activeLink) activeLink.classList.add('active');
     }
 }
 
-window.showBigImage = function(src) {
+window.showBigImage = function (src) {
     const mainImg = document.getElementById("main-img");
     if (mainImg) mainImg.src = src;
 };
 
-window.resetBigImage = function() {
+window.resetBigImage = function () {
     const mainImg = document.getElementById("main-img");
     if (mainImg && mainImg.dataset.original) {
         mainImg.src = mainImg.dataset.original;
@@ -55,15 +67,22 @@ window.resetBigImage = function() {
 async function loadGames() {
     try {
         const response = await fetch("http://localhost:3000/api/games");
-        allGames = await response.json(); 
-        
+        allGames = await response.json();
+
         featuredGames = allGames.filter((game) => game.category === "destacados");
         discountGames = allGames.filter((g) => g.category === "descuentos");
 
         renderFeatured();
         renderDiscounts();
-        renderTabbedList(allGames); 
-        showSection('store'); // Initialize to show store
+        renderTabbedList(allGames);
+        
+        // Initialize section based on URL hash or default to store
+        const hash = window.location.hash.replace('#', '');
+        if (hash === 'profile' || hash === 'store') {
+            showSection(hash);
+        } else {
+            showSection('store');
+        }
     } catch (error) {
         console.error("Error cargando el JSON:", error);
     }
@@ -113,7 +132,7 @@ function renderFeatured() {
 function updateDots(containerId, activeIndex, totalDots) {
     const dotsContainer = document.getElementById(containerId);
     if (!dotsContainer) return;
-    
+
     let dotsHTML = "";
     for (let i = 0; i < totalDots; i++) {
         dotsHTML += `<span class="dot ${i === activeIndex ? "active" : ""}"></span>`;
@@ -151,7 +170,7 @@ function renderDiscounts() {
         </div>
         `;
     }).join("");
-    
+
     updateDots("dots-offers-container", Math.floor(offerIndex / 4), Math.ceil(discountGames.length / 4));
 }
 
@@ -161,7 +180,7 @@ function renderDiscounts() {
 function renderTabbedList(listToRender) {
     const listContainer = document.getElementById("main-games-list");
     if (!listContainer) return;
-    
+
     listContainer.innerHTML = listToRender.slice(0, 10).map(game => `
         <div class="list-item" onmouseover="showPreview(${game.id})">
             <img src="${game.main_image}" width="120">
@@ -198,7 +217,7 @@ window.showPreview = function (id) {
     actions.style.marginBottom = "15px";
     actions.style.display = "flex";
     actions.style.gap = "10px";
-   
+
     actions.innerHTML = `
         <button onclick="addToCart(${game.id})" class="btn-steam">Añadir al carro</button>
         <button onclick="addToWishlist(${game.id})" class="btn-wish">♥</button>
@@ -232,7 +251,7 @@ window.showPreview = function (id) {
 /* =========================================
    LÓGICA DE CARRITO Y FAVORITOS (LOCALSTORAGE)
    ========================================= */
-window.updateCartUI = function() {
+window.updateCartUI = function () {
     const cartBtn = document.getElementById("cart-button");
     const countSpan = document.getElementById("cart-count");
     if (cartBtn && countSpan) {
@@ -250,7 +269,7 @@ window.addEventListener('DOMContentLoaded', () => {
     window.updateCartUI();
 });
 
-window.addToCart = function(id) {
+window.addToCart = function (id) {
     const game = allGames.find(g => g.id === id);
     if (game && !cart.some(item => item.id === id)) {
         cart.push(game);
@@ -262,7 +281,7 @@ window.addToCart = function(id) {
     }
 };
 
-window.addToWishlist = function(id) {
+window.addToWishlist = function (id) {
     const game = allGames.find(g => g.id === id);
     if (game && !wishlist.some(item => item.id === id)) {
         wishlist.push(game);
@@ -277,8 +296,8 @@ window.addToWishlist = function(id) {
 if (searchInput) {
     searchInput.addEventListener("input", (e) => {
         const searchTerm = e.target.value.toLowerCase();
-        const filteredResults = allGames.filter((game) => 
-            game.title.toLowerCase().includes(searchTerm) || 
+        const filteredResults = allGames.filter((game) =>
+            game.title.toLowerCase().includes(searchTerm) ||
             game.tag.toLowerCase().includes(searchTerm)
         );
         renderTabbedList(filteredResults);
@@ -311,9 +330,9 @@ document.getElementById("prevOfferBtn").onclick = () => {
 // Iniciar aplicación
 loadGames();
 
-window.filterTabs = function(category) {
+window.filterTabs = function (category) {
     let filteredGames;
-    switch(category) {
+    switch (category) {
         case 'novedades':
             filteredGames = allGames.slice(0, 10); // Primeros 10 juegos
             break;
@@ -335,7 +354,7 @@ window.filterTabs = function(category) {
 let tooltipInterval;
 let tooltipContainer = null;
 
-window.showGameTooltip = function(event, gameId) {
+window.showGameTooltip = function (event, gameId) {
     if (!tooltipContainer) {
         tooltipContainer = document.createElement("div");
         tooltipContainer.id = "global-game-tooltip";
@@ -368,7 +387,7 @@ window.showGameTooltip = function(event, gameId) {
 
     // Posicionar relativo al elemento que dispara el evento
     const rect = event.currentTarget.getBoundingClientRect();
-    
+
     let left = rect.right + window.scrollX + 15;
     let top = rect.top + window.scrollY;
 
@@ -376,7 +395,7 @@ window.showGameTooltip = function(event, gameId) {
     if (left + 320 > window.innerWidth) {
         left = rect.left + window.scrollX - 335;
     }
-    
+
     // Si se sale por abajo
     if (top + 250 > window.innerHeight + window.scrollY) {
         top = window.innerHeight + window.scrollY - 260;
@@ -393,11 +412,11 @@ window.showGameTooltip = function(event, gameId) {
             if (imgEl) {
                 imgEl.src = game.screenshots[shotIndex];
             }
-        }, 1500); 
+        }, 1500);
     }
 };
 
-window.hideGameTooltip = function() {
+window.hideGameTooltip = function () {
     if (tooltipContainer) {
         tooltipContainer.style.display = "none";
         tooltipContainer.style.opacity = 0;
