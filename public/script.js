@@ -15,6 +15,10 @@ const searchInput = document.getElementById("search-input");
 
 const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22231%22%20height%3D%2287%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23222%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23ccc%22%20font-size%3D%2214%22%20font-family%3D%22Arial%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E';
 
+function goToGamePage(id) {
+    window.location.href = `game.html?id=${id}`;
+}
+
 function getReviewData(game) {
     const reviewOptions = [
         { status: 'Muy negativas', min: 500, max: 2500 },
@@ -156,7 +160,7 @@ function renderFeatured() {
         `).join("");
 
     contentArea.innerHTML = `
-        <div class="carousel-card">
+        <div class="carousel-card" onclick="goToGamePage(${game.id})" style="cursor:pointer;">
             <div class="main-capsule">
                 <img src="${game.main_image}" id="main-img" data-original="${game.main_image}" alt="Portada de ${game.title}"
                      onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
@@ -202,7 +206,7 @@ function renderDiscounts() {
         const offerClass = isMidweek ? "offer-midweek" : "offer-daily";
         const offerTitle = isMidweek ? "OFERTA DE ENTRE SEMANA" : "OFERTA DEL DÍA";
         return `
-        <div class="offer-card ${offerClass}" onmouseenter="showGameTooltip(event, ${game.id})" onmouseleave="hideGameTooltip()">
+        <div class="offer-card ${offerClass}" onmouseenter="showGameTooltip(event, ${game.id})" onmouseleave="hideGameTooltip()" onclick="goToGamePage(${game.id})" style="cursor:pointer;">
             <div class="offer-image-container">
                 <img src="${game.main_image}" alt="${game.title}"
                      onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
@@ -234,7 +238,7 @@ function renderTabbedList(listToRender) {
     listContainer.innerHTML = listToRender.slice(0, 10).map(game => {
         const priceHtml = game.category === 'proximos' ? '' : `<div class="game-price">${game.price}</div>`;
         return `
-        <div class="list-item" onmouseover="showPreview(${game.id})">
+        <div class="list-item" onmouseover="showPreview(${game.id})" onclick="goToGamePage(${game.id})">
             <img src="${game.main_image}" alt="${game.title}" width="120" onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
             <div class="list-item-meta">
                 <div class="game-name">${game.title}</div>

@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tu Carrito - Steam</title>
+    <title>Juego - Steam</title>
     <link rel="stylesheet" href="style.css?v=3" />
+    <script src="game-page.js" defer></script>
 </head>
 
-<body style="background-color: #1b2838;">
+<body>
     <header class="top-header">
         <div class="container main-nav">
             <div class="logo">
@@ -64,33 +65,108 @@
     <nav class="sub-header">
         <div class="container sub-nav-content">
             <ul class="sub-menu">
-                <li><a href="index.html">Explorar ▾</a></li>
+                <li><a href="#">Explorar ▾</a></li>
                 <li><a href="#">Recomendaciones ▾</a></li>
                 <li><a href="#">Categorías ▾</a></li>
                 <li><a href="#">Hardware ▾</a></li>
                 <li><a href="#">Formas de Jugar ▾</a></li>
                 <li><a href="#">Miselanea ▾</a></li>
             </ul>
+            <div class="sub-header-right">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Buscar en la tienda" autocomplete="off">
+                    <button id="search-button">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                            viewBox="0 0 100 100">
+                            <path fill="#ffffff"
+                                d="M94.4,85.6l-21-21c5.2-6.6,8.2-14.8,8.2-23.7C81.6,18.3,63.3,0,40.8,0S0,18.3,0,40.8S18.3,81.6,40.8,81.6c8.9,0,17.1-3,23.7-8.2l21,21c1.2,1.2,3.1,1.2,4.3,0l4.3-4.3C95.6,88.7,95.6,86.8,94.4,85.6z M40.8,69.5c-15.8,0-28.7-12.9-28.7-28.7 S25,12.1,40.8,12.1S69.5,25,69.5,40.8S56.6,69.5,40.8,69.5z" />
+                        </svg>
+                    </button>
+                    <div class="search-results" id="search-results" role="listbox" aria-label="Resultados de búsqueda">
+                    </div>
+                </div>
+                <div class="wishlist-link">
+                    <span style="font-size: 14px; margin-right: 5px;">★</span>
+                    <a href="lista_favoritos.html">Lista de deseados</a>
+                </div>
+                <a href="carrito_compra.html" class="btn-cart" id="cart-button" style="display: none;">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l.89-4.5H4.002L3.102 4z" />
+                        <path
+                            d="M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                    Carro <span id="cart-count"></span>
+                </a>
+            </div>
         </div>
     </nav>
 
-    <main class="container" style="margin-top: 30px; margin-bottom: 100px; max-width: 940px;">
-        <h1 style="color: #fff; font-size: 24px; font-weight: normal; margin-bottom: 20px; text-transform: uppercase;">Tu Carro de la compra</h1>
-        
-        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 20px;">
-            <div id="cart-container">
-                <!-- Los juegos del carrito se cargarán aquí -->
-                <p style="color: #8f98a0;">Cargando tu carrito...</p>
+    <main class="game-page-container">
+        <div class="container">
+            <h1 id="game-title" class="game-title-header">Cargando juego...</h1>
+            
+            <div class="game-main-content">
+                <!-- Left: Media -->
+                <div class="game-media-showcase">
+                    <div class="main-media-view" id="main-media-container">
+                        <!-- Imagen principal aquí -->
+                    </div>
+                    <div class="media-thumbnails" id="media-thumbnails">
+                        <!-- Miniaturas aquí -->
+                    </div>
+                </div>
+
+                <!-- Right: Side Info -->
+                <div class="game-side-info">
+                    <img id="side-game-img" src="" class="side-main-img" alt="">
+                    <div id="game-short-desc" class="side-description">
+                        Este juego te ofrece una experiencia única e inmersiva...
+                    </div>
+                    <div class="side-metadata">
+                        <div class="meta-row">
+                            <span class="meta-label">Reseñas:</span>
+                            <span class="meta-value" id="game-reviews">Muy positivas</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Fecha:</span>
+                            <span class="meta-value" id="game-release">25 ABR 2025</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">Desarrollador:</span>
+                            <span class="meta-value">Steam Clone Studios</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="cart-summary" style="background: rgba(0,0,0,0.2); padding: 20px; height: fit-content;">
-                <div style="color: #fff; font-size: 14px; margin-bottom: 10px; display: flex; justify-content: space-between;">
-                    <span>Total estimado:</span>
-                    <span id="cart-total-value" style="font-size: 18px; font-weight: bold;">0,00€</span>
+            <!-- Wishlist Bar -->
+            <div class="wishlist-actions-bar">
+                <div class="wishlist-left-btns">
+                    <button class="btn-wishlist-action" id="btn-add-wishlist">Añadir a tu lista de deseados</button>
+                    <button class="btn-wishlist-action">Seguir</button>
+                    <button class="btn-wishlist-action">Ignorar</button>
                 </div>
-                <p style="color: #8f98a0; font-size: 11px; margin-bottom: 20px;">Las ventas se procesarán en tu moneda local.</p>
-                <button id="checkout-btn" style="width: 100%; background: linear-gradient(to bottom, #75b022 5%, #588a1b 95%); color: #d2efa9; border: none; padding: 12px; border-radius: 2px; cursor: pointer; font-size: 15px; font-weight: bold;">Comprar para mí</button>
-                <button style="width: 100%; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 10px; border-radius: 2px; cursor: pointer; font-size: 13px; margin-top: 10px;">Comprar como regalo</button>
+                <a href="lista_favoritos.html" class="btn-view-list">Ver tu lista →</a>
+            </div>
+
+            <!-- Purchase Area -->
+            <div class="purchase-section">
+                <div class="purchase-text">
+                    <h3 id="purchase-title">Comprar Juego</h3>
+                </div>
+                <div class="purchase-action">
+                    <div class="price-box" id="game-price">29,99€</div>
+                    <button class="btn-add-cart">Añadir al carro</button>
+                </div>
+            </div>
+
+            <!-- About Game -->
+            <div class="game-details-tabs">
+                <div class="detail-section-title">Acerca de este juego</div>
+                <div id="game-long-desc" class="detail-content">
+                    <p>Contenido detallado del juego próximamente...</p>
+                </div>
             </div>
         </div>
     </main>
@@ -107,7 +183,7 @@
                         <img src="https://steamcdn-a.akamaihd.net/store/about/logo_steam.svg" alt="Steam" class="logo-steam">
                     </div>
                     <div class="legal-text">
-                        <p>© 2026 Valve Corporation. Todos los derechos reservados.</p>
+                        <p>© 2026 Valve Corporation. Todos los derechos reservados. Todas las marcas registradas pertenecen a sus respectivos dueños.</p>
                     </div>
                 </div>
             </div>
@@ -115,7 +191,7 @@
     </footer>
 
     <script>
-        // Lógica de sesión idéntica a index.html
+        // Lógica básica de sesión idéntica a index.html
         document.addEventListener('DOMContentLoaded', () => {
             const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
             const headerLogin = document.getElementById('header-login-container');
@@ -156,63 +232,15 @@
                 if (headerUser) headerUser.style.display = 'none';
             }
 
-            renderCart();
-        });
-
-        function renderCart() {
-            const cartContainer = document.getElementById("cart-container");
-            const totalValueEl = document.getElementById("cart-total-value");
-            let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
-
-            if (cart.length === 0) {
-                cartContainer.innerHTML = `
-                    <div style="background: rgba(0,0,0,0.2); padding: 40px; text-align: center; color: #8f98a0; border-radius: 4px;">
-                        <p style="font-size: 18px; margin-bottom: 10px;">Tu carro está vacío.</p>
-                        <a href="index.html" style="color: #66c0f4; text-decoration: none;">Continuar comprando</a>
-                    </div>
-                `;
-                totalValueEl.textContent = "0,00€";
-                return;
+            // Actualizar carrito al cargar
+            const cart = JSON.parse(localStorage.getItem('steam_cart') || '[]');
+            const cartCount = document.getElementById('cart-count');
+            const cartBtn = document.getElementById('cart-button');
+            if (cartCount && cart.length > 0) {
+                cartCount.textContent = cart.length;
+                if (cartBtn) cartBtn.style.display = 'flex';
             }
-
-            let total = 0;
-            cartContainer.innerHTML = cart.map(game => {
-                // Limpiar el precio para sumar (ej: "29,99€" -> 29.99)
-                let pStr = game.final_price || game.price || "0";
-                let cleanPrice = parseFloat(pStr.replace('€', '').replace(',', '.').trim());
-                if (!isNaN(cleanPrice)) total += cleanPrice;
-
-                return `
-                    <div class="cart-item" style="display: flex; background: rgba(0,0,0,0.4); margin-bottom: 5px; padding: 10px; border-radius: 2px;">
-                        <img src="${game.main_image}" style="width: 120px; height: 56px; object-fit: cover; border-radius: 2px;">
-                        <div style="flex-grow: 1; padding: 0 15px; display: flex; flex-direction: column; justify-content: center;">
-                            <h3 style="color: #fff; font-size: 15px; font-weight: normal; margin-bottom: 2px;">${game.title}</h3>
-                            <div style="font-size: 11px; color: #8f98a0;">Para Windows</div>
-                        </div>
-                        <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: center; min-width: 100px;">
-                            <div style="color: #fff; font-size: 14px; margin-bottom: 4px;">${pStr}</div>
-                            <button onclick="removeFromCart(${game.id})" style="background: transparent; color: #8f98a0; border: none; font-size: 11px; text-decoration: underline; cursor: pointer;">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            }).join("");
-
-            totalValueEl.textContent = total.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + "€";
-        }
-
-        function removeFromCart(id) {
-            let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
-            cart = cart.filter(game => game.id !== id);
-            localStorage.setItem("steam_cart", JSON.stringify(cart));
-            renderCart();
-            // Actualizar el header si estamos en la misma página (aunque aquí no se ve el contador si no refrescas)
-        }
-
-        document.getElementById("checkout-btn").onclick = () => {
-            alert("¡Gracias por tu compra simulada! Tu pedido ha sido procesado.");
-            localStorage.removeItem("steam_cart");
-            renderCart();
-        };
+        });
     </script>
 </body>
 </html>
