@@ -109,6 +109,6 @@ CREATE TABLE IF NOT EXISTS favorite_items (
 -- Insertar usuarios de prueba (contraseña '1234' hasheada con bcrypt)
 -- El hash de '1234' es: $2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i
 INSERT INTO users (username, password, role) VALUES 
-('admin', '$2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i', 'admin'),
-('akn.raouia', '$2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i', 'user')
+('admin', '123456', 'admin'),
+('akn.raouia', '123456', 'user')
 ON DUPLICATE KEY UPDATE username=username;

@@ -164,7 +164,7 @@
         }
 
         function validatePassword(password) {
-            return password.length >= 6;
+            return password.length >= 4;
         }
 
         registerForm.addEventListener('submit', async (event) => {
@@ -181,7 +181,7 @@
             }
 
             if (!validatePassword(password)) {
-                showError('La contraseña debe tener al menos 6 caracteres.');
+                showError('La contraseña debe tener al menos 4 caracteres.');
                 return;
             }
 

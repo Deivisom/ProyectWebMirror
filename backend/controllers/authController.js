@@ -54,8 +54,8 @@ async function register(req, res) {
     return res.status(400).json({ error: 'El nombre de usuario debe tener entre 4 y 20 caracteres válidos' });
   }
 
-  if (password.length < 6) {
-    return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' });
+  if (password.length < 4) {
+    return res.status(400).json({ error: 'La contraseña debe tener al menos 4 caracteres' });
   }
 
   try {
