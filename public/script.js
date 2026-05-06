@@ -72,7 +72,6 @@ function showSection(section) {
     const profileSection = document.getElementById('profile-section');
     const menuLinks = document.querySelectorAll('.menu-links a');
     const subHeader = document.querySelector('.sub-header');
-    const footerCta = document.querySelector('.footer-cta');
 
     // Update URL hash
     window.location.hash = section;
@@ -81,7 +80,6 @@ function showSection(section) {
         storeSection.style.display = 'block';
         profileSection.style.display = 'none';
         if (subHeader) subHeader.style.display = 'flex';
-        if (footerCta) footerCta.style.display = 'block';
         const footer = document.querySelector('.main-footer');
         if (footer) footer.classList.remove('profile-mode');
         menuLinks.forEach(link => link.classList.remove('active'));
@@ -91,7 +89,6 @@ function showSection(section) {
         storeSection.style.display = 'none';
         profileSection.style.display = 'block';
         if (subHeader) subHeader.style.display = 'none';
-        if (footerCta) footerCta.style.display = 'none';
         const footer = document.querySelector('.main-footer');
         if (footer) footer.classList.add('profile-mode');
         menuLinks.forEach(link => link.classList.remove('active'));

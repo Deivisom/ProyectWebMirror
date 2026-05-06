@@ -19,7 +19,7 @@
             <ul class="menu-links">
                 <li><a href="#" onclick="showSection('store')" class="active">TIENDA</a></li>
                 <li><a href="#">COMUNIDAD</a></li>
-                <li><a href="#" onclick="showSection('profile')">AKN.RAOUIA</a></li>
+                <li><a href="#">ACERCA DE</a></li>
                 <li><a href="#">CHAT</a></li>
                 <li id="support-menu-item" style="display:none;">
                     <a id="support-link" href="admin.html">SOPORTE</a>
@@ -34,18 +34,35 @@
                     </svg>
                     Instalar Steam
                 </a>
-                <div class="notification-bell">
-                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16px"
-                        height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-                        <path fill="#e5e4e4"
-                            d="M14.5,11.5L13,10V6c0-2.8-2.2-5-5-5S3,3.2,3,6v4L1.5,11.5c-0.3,0.3-0.5,0.7-0.5,1.1C1,13.4,1.6,14,2.4,14 h11.1C14.4,14,15,13.4,15,12.6C15,12.2,14.8,11.8,14.5,11.5z M8,16c1.1,0,2-0.9,2-2H6C6,15.1,6.9,16,8,16z" />
-                    </svg>
+
+                <!-- Div para cuando NO hay sesión -->
+                <div id="header-login-container" style="display: none; align-items: center; gap: 8px;">
+                    <a href="login.html" style="color: #fff; text-decoration: none; font-size: 11px;">iniciar sesión</a>
+                    <span style="color: #444; font-size: 11px;">|</span>
+                    <a href="#" style="color: #b8b6b4; text-decoration: none; font-size: 11px;">idioma ▾</a>
                 </div>
-                <div class="profile-info-header">
-                    <span class="profile-name">akn.raouia ▾</span>
-                    <span class="wallet-balance">0,49€</span>
+
+                <!-- Div para cuando SÍ hay sesión -->
+                <div id="header-user-container" style="display: none; align-items: center; gap: 15px;">
+                    <div class="notification-bell">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16px"
+                            height="16px" viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                            <path fill="#e5e4e4"
+                                d="M14.5,11.5L13,10V6c0-2.8-2.2-5-5-5S3,3.2,3,6v4L1.5,11.5c-0.3,0.3-0.5,0.7-0.5,1.1C1,13.4,1.6,14,2.4,14 h11.1C14.4,14,15,13.4,15,12.6C15,12.2,14.8,11.8,14.5,11.5z M8,16c1.1,0,2-0.9,2-2H6C6,15.1,6.9,16,8,16z" />
+                        </svg>
+                    </div>
+                    <div class="profile-info-header" id="profile-dropdown-trigger" style="cursor: pointer;">
+                        <span class="profile-name" id="display-username">Cargando... ▾</span>
+                        <span class="wallet-balance">0,49€</span>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="profile-dropdown" class="profile-dropdown-content">
+                            <a href="admin.html" id="dropdown-admin-link">Panel de administración</a>
+                            <a href="#" id="dropdown-logout-link">Cerrar sesión</a>
+                        </div>
+                    </div>
+                    <img src="./img/profile/benny.jpg" class="top-avatar" onclick="showSection('profile')" alt="Perfil" style="cursor: pointer;">
                 </div>
-                <img src="./img/profile/benny.jpg" class="top-avatar" onclick="showSection('profile')" alt="Perfil">
             </div>
         </div>
     </header>
@@ -394,13 +411,24 @@
 
 
 
-    <!--footer-->
     <footer class="main-footer">
-        <div class="container footer-cta">
+        <!-- CTA para cuando NO hay sesión -->
+        <div id="footer-cta-guest" class="container footer-cta">
             <p>¿Buscando recomendaciones?</p>
             <p class="sub-cta">Inicia sesión para ver recomendaciones personalizadas</p>
             <a href="login.html" class="btn-login-footer">Iniciar sesión</a>
             <p class="register-text">O <a href="#">regístrate</a> y únete a Steam de forma gratuita</p>
+        </div>
+
+        <!-- CTA para cuando SÍ hay sesión -->
+        <div id="footer-cta-user" class="container footer-logged-in-cta" style="display: none; text-align: center; padding: 60px 0;">
+            <div style="margin-bottom: 25px; opacity: 0.4;">
+                <svg width="120" height="40" viewBox="0 0 100 40" fill="#8f98a0" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 0C36.2 0 25 11.2 25 25C25 26.6 25.2 28.2 25.5 29.7L32.8 24.6C32.4 23.8 32.2 22.9 32.2 22C32.2 18.6 34.9 15.9 38.3 15.9C41.7 15.9 44.4 18.6 44.4 22C44.4 25.4 41.7 28.1 38.3 28.1C37.4 28.1 36.5 27.9 35.7 27.5L28.6 32.5C33.1 37.1 39.4 40 46.4 40C60.2 40 71.4 28.8 71.4 15C71.4 1.2 60.2 0 50 0ZM38.3 25.6C40.3 25.6 41.9 24 41.9 22C41.9 20 40.3 18.4 38.3 18.4C36.3 18.4 34.7 20 34.7 22C34.7 24 36.3 25.6 38.3 25.6Z"/>
+                </svg>
+            </div>
+            <h2 style="color: #66c0f4; font-size: 26px; font-weight: normal; margin-bottom: 10px;">Sigue bajando para ver más recomendaciones</h2>
+            <p style="color: #8f98a0; font-size: 14px;">A continuación encontrarás una variedad de títulos de entre las categorías de Steam que podrían interesarte.</p>
         </div>
 
         <div class="footer-legal store-footer-content">
@@ -539,38 +567,70 @@
             </div>
         </div>
         <script>
-            try {
-                const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
-                const loginBtn = document.querySelector('.btn-login-footer');
-                if (currentUser && currentUser.username && loginBtn) {
-                    loginBtn.textContent = 'Cerrar sesión';
-                    loginBtn.href = 'login.html';
-                    const status = document.createElement('div');
-                    status.style.color = '#c6d4df';
-                    status.style.fontSize = '14px';
-                    status.style.marginTop = '12px';
-                    status.textContent = `Logueado como ${currentUser.username}`;
-                    loginBtn.parentNode.insertBefore(status, loginBtn.nextSibling);
-                }
-            } catch (e) {
-                console.warn('No se pudo leer la sesión', e);
-            }
-        </script>
-        <script>
             document.addEventListener('DOMContentLoaded', () => {
+                const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+                
+                const headerLogin = document.getElementById('header-login-container');
+                const headerUser = document.getElementById('header-user-container');
+                const displayUsername = document.getElementById('display-username');
+                
+                const footerGuest = document.getElementById('footer-cta-guest');
+                const footerUser = document.getElementById('footer-cta-user');
                 const supportMenuItem = document.getElementById('support-menu-item');
 
-                let currentUser = null;
+                const dropdownTrigger = document.getElementById('profile-dropdown-trigger');
+                const dropdownMenu = document.getElementById('profile-dropdown');
+                const dropdownAdminLink = document.getElementById('dropdown-admin-link');
+                const dropdownLogoutLink = document.getElementById('dropdown-logout-link');
 
-                try {
-                    currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
-                } catch (e) {
-                    currentUser = null;
+                if (currentUser && currentUser.username) {
+                    // Estado: Sesión iniciada
+                    if (headerLogin) headerLogin.style.display = 'none';
+                    if (headerUser) {
+                        headerUser.style.display = 'flex';
+                        displayUsername.textContent = `${currentUser.username} ▾`;
+                    }
+                    
+                    // Solo mostrar el de abajo (footerUser) y asegurar que el de arriba (footerGuest) NO se vea
+                    if (footerGuest) footerGuest.setAttribute('style', 'display: none !important;');
+                    if (footerUser) footerUser.style.display = 'block';
+                    
+                    // Siempre mostrar soporte para cualquier usuario logueado
+                    if (supportMenuItem) supportMenuItem.style.display = 'inline-block';
+
+                    // Toggle dropdown
+                    if (dropdownTrigger && dropdownMenu) {
+                        dropdownTrigger.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            dropdownMenu.classList.toggle('show');
+                        });
+                    }
+
+                    // Logout
+                    if (dropdownLogoutLink) {
+                        dropdownLogoutLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            localStorage.removeItem('steam_current_user');
+                            localStorage.removeItem('steam_jwt_token');
+                            window.location.reload();
+                        });
+                    }
+                } else {
+                    // Estado: Invitado
+                    if (headerLogin) headerLogin.style.display = 'flex';
+                    if (headerUser) headerUser.style.display = 'none';
+                    
+                    if (footerGuest) footerGuest.style.display = 'block';
+                    if (footerUser) footerUser.style.display = 'none';
+                    if (supportMenuItem) supportMenuItem.style.display = 'none';
                 }
 
-                if (supportMenuItem && currentUser && currentUser.username === 'akn.raouia') {
-                    supportMenuItem.style.display = 'inline-block';
-                }
+                // Cerrar dropdown al hacer click fuera
+                window.addEventListener('click', () => {
+                    if (dropdownMenu && dropdownMenu.classList.contains('show')) {
+                        dropdownMenu.classList.remove('show');
+                    }
+                });
             });
         </script>
 </body>

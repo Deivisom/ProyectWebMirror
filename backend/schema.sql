@@ -3,6 +3,10 @@ CREATE DATABASE IF NOT EXISTS steam;
 USE steam;
 
 -- Tabla de juegos
+
+DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE IF NOT EXISTS games (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -65,3 +69,18 @@ INSERT INTO games (title, category, tag, main_image, price, original_price, fina
 ('Resident Evil 2', 'descuentos', 'Terror', 'https://cdn.cloudflare.steamstatic.com/steam/apps/883710/capsule_616x353.jpg', '19,99€', '39,99€', '19,99€', '-50%', '["https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/ss_lulululululululululululululululululululululu.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/ss_mvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmvmv.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/ss_nwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnw.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/883710/ss_oxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxoxo.1920x1080.jpg?t=1700000000"]'),
 
 ('Control Ultimate Edition', 'descuentos', 'Acción', 'https://cdn.cloudflare.steamstatic.com/steam/apps/870780/capsule_616x353.jpg', '19,99€', '39,99€', '19,99€', '-50%', '["https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/870780/ss_pypypypypypypypypypypypypypypypypypypypypy.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/870780/ss_qzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqzqz.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/870780/ss_rararararararararararararararararararararara.1920x1080.jpg?t=1700000000","https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/870780/ss_sbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsbsb.1920x1080.jpg?t=1700000000"]');
+
+-- Tabla de usuarios
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL, -- Guardaremos el hash de bcrypt
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
+);
+
+-- Insertar usuarios de prueba (contraseña '1234' hasheada con bcrypt)
+-- El hash de '1234' es: $2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i
+INSERT INTO users (username, password, role) VALUES 
+('admin', '$2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i', 'admin'),
+('akn.raouia', '$2b$10$0AVEPAkG2c7dmSftqJpRMO3QZYnAxIZu42lQw/Duj7f4JfYTyIa5i', 'user')
+ON DUPLICATE KEY UPDATE username=username;
