@@ -1,13 +1,52 @@
 # ProyectWebMirror
-- aceptar invitacion (mirad  vuestro correo)
-- Realizar git clone https://www.youtube.com/watch?v=4JEx9rVmecw
-- Cada uno realizara una pagina
-- Para acabar el prototipo solo realizaremos html y css
-- Antes de subir cambios, descarguen las últimas actualizaciones con git pull o sincronizar los cambios (en "cambios" pulsando los "..." y pulsar en "pull,push", -> "sincronizar")
-<img width="1034" height="792" alt="image" src="https://github.com/user-attachments/assets/7597c0cd-4fc3-4500-a005-a24124d1165c" />
 
-- Poner tantos comentarios para que sea estructurado y entendible para explicar en la presentación
-- Al terminar una modificación subir el commit con una breve descripción
-!!!!ES OBLIGATORIO PONER MENSAJE SI QUEREIS QUE SE GUARDEN LOS CAMBIOS!!!!!
+Clon de Steam desarrollado como proyecto web completo.
+
+## Descripción
+Aplicación web que simula una tienda de juegos como Steam, con front office público y back office para administración.
+
+## Tecnologías
+- **Frontend**: HTML, CSS, JavaScript (Bootstrap para diseño responsive)
+- **Backend**: Node.js, Express.js, MySQL
+- **Base de datos**: MySQL
+
+## Funcionalidades implementadas
+- **Front Office**:
+  - Lista de juegos con categorías
+  - Búsqueda y filtrado
+  - Paginación
+  - Carrito y favoritos (localStorage)
+  - Login básico
+  - Diseño responsive
+
+- **Back Office**:
+  - CRUD completo para juegos (admin.html)
+  - API RESTful con rutas POST, PUT, DELETE
+
+- **API**:
+  - GET /api/games (con paginación)
+  - GET /api/games/:id
+  - POST /api/games
+  - PUT /api/games/:id
+  - DELETE /api/games/:id
+
+## Instalación
+1. Instalar dependencias: `npm install`
+2. Configurar DB en .env (DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+3. Ejecutar schema.sql en MySQL
+4. Iniciar servidor: `npm start`
+
+## Estructura del proyecto
+- `server.js`: Servidor Express y API
+- `script.js`: Lógica frontend
+- `admin.html`: Panel de administración
+- `index.html`: Página principal
+- `schema.sql`: Esquema de base de datos
+
+## Próximos pasos
+- Persistir carritos/favoritos en DB
+- Autenticación JWT
+- Documentación completa
+- Despliegue en Heroku
 
   
