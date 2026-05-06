@@ -52,10 +52,11 @@
         </ul>
         <div class="sub-header-right">
           <div class="search-container">
-            <input type="text" id="search-input" placeholder="Buscar en la tienda">
+            <input type="text" id="search-input" placeholder="Buscar en la tienda" autocomplete="off">
             <button id="search-button">
                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 100 100"><path fill="#ffffff" d="M94.4,85.6l-21-21c5.2-6.6,8.2-14.8,8.2-23.7C81.6,18.3,63.3,0,40.8,0S0,18.3,0,40.8S18.3,81.6,40.8,81.6c8.9,0,17.1-3,23.7-8.2l21,21c1.2,1.2,3.1,1.2,4.3,0l4.3-4.3C95.6,88.7,95.6,86.8,94.4,85.6z M40.8,69.5c-15.8,0-28.7-12.9-28.7-28.7 S25,12.1,40.8,12.1S69.5,25,69.5,40.8S56.6,69.5,40.8,69.5z"/></svg>
             </button>
+            <div class="search-results" id="search-results" role="listbox" aria-label="Resultados de búsqueda"></div>
           </div>
           <div class="wishlist-link">
              <span style="font-size: 14px; margin-right: 5px;">★</span>
@@ -144,6 +145,12 @@
                             <div class="persona-name-group">
                                 <h2 class="persona-name">akn.raouia</h2>
                                 <span class="persona-arrow">▾</span>
+                            </div>
+                            <div class="profile-status">En línea · Español</div>
+                            <div class="profile-meta-row">
+                                <span class="profile-meta-pill">Nivel 5</span>
+                                <span class="profile-meta-pill">16 juegos</span>
+                                <span class="profile-meta-pill">24 amigos</span>
                             </div>
                         </div>
                     </div>
@@ -351,7 +358,7 @@
     <div class="container footer-cta">
         <p>¿Buscando recomendaciones?</p>
         <p class="sub-cta">Inicia sesión para ver recomendaciones personalizadas</p>
-        <a href="#" class="btn-login-footer">Iniciar sesión</a>
+        <a href="login.html" class="btn-login-footer">Iniciar sesión</a>
         <p class="register-text">O <a href="#">regístrate</a> y únete a Steam de forma gratuita</p>
     </div>
 
@@ -465,6 +472,23 @@
             </div>
         </div>
     </div>
-        
+    <script>
+        try {
+            const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+            const loginBtn = document.querySelector('.btn-login-footer');
+            if (currentUser && currentUser.username && loginBtn) {
+                loginBtn.textContent = 'Cerrar sesión';
+                loginBtn.href = 'login.html';
+                const status = document.createElement('div');
+                status.style.color = '#c6d4df';
+                status.style.fontSize = '14px';
+                status.style.marginTop = '12px';
+                status.textContent = `Logueado como ${currentUser.username}`;
+                loginBtn.parentNode.insertBefore(status, loginBtn.nextSibling);
+            }
+        } catch (e) {
+            console.warn('No se pudo leer la sesión', e);
+        }
+    </script>
   </body>
 </html>

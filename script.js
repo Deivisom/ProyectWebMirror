@@ -15,6 +15,57 @@ const searchInput = document.getElementById("search-input");
 
 const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22231%22%20height%3D%2287%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23222%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23ccc%22%20font-size%3D%2214%22%20font-family%3D%22Arial%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E';
 
+function getReviewData(game) {
+    const reviewOptions = [
+        { status: 'Muy negativas', min: 500, max: 2500 },
+        { status: 'Negativas', min: 2500, max: 8000 },
+        { status: 'Mixtas', min: 8000, max: 20000 },
+        { status: 'Mayormente positivas', min: 18000, max: 42000 },
+        { status: 'Muy positivas', min: 40000, max: 90000 },
+        { status: 'Extremadamente positivas', min: 85000, max: 160000 }
+    ];
+
+    const bias = game.category === 'proximos' ? 2 : game.discount ? 4 : 3;
+    const index = Math.min(reviewOptions.length - 1, bias + (game.tag?.toLowerCase().includes('popular') ? 1 : 0));
+    const option = reviewOptions[Math.max(0, index)];
+
+    const count = Math.floor(Math.random() * (option.max - option.min + 1)) + option.min;
+    return {
+        review_status: option.status,
+        review_count: count
+    };
+}
+
+function normalizeGame(game) {
+    const safeScreenshots = Array.isArray(game.screenshots) ? game.screenshots.filter(Boolean) : [];
+    const mainImage = game.main_image || fallbackThumbnail;
+    const finalPrice = game.final_price || null;
+    const originalPrice = game.original_price || null;
+    const rawPrice = game.price && game.price !== 'Gratis' ? game.price : null;
+
+    const price = game.category === 'proximos' ? '' : rawPrice || finalPrice || originalPrice || '—';
+    const displayOriginal = originalPrice || price;
+    const displayFinal = finalPrice || price;
+
+    const reviewData = getReviewData(game);
+
+    return {
+        id: typeof game.id === 'number' ? game.id : Number(game.id) || Date.now(),
+        title: game.title || 'Título desconocido',
+        category: game.category || 'otros',
+        main_image: mainImage,
+        screenshots: safeScreenshots.length ? safeScreenshots : [mainImage],
+        tag: game.tag || 'Recomendado',
+        price,
+        discount: game.discount || '',
+        original_price: displayOriginal,
+        final_price: displayFinal,
+        description: game.description || '',
+        review_status: game.review_status || reviewData.review_status,
+        review_count: game.review_count || reviewData.review_count
+    };
+}
+
 // Función para mostrar secciones dinámicamente
 function showSection(section) {
     const storeSection = document.getElementById('store-section');
@@ -67,14 +118,15 @@ window.resetBigImage = function () {
 async function loadGames() {
     try {
         const response = await fetch("http://localhost:3000/api/games");
-        allGames = await response.json();
+        const rawGames = await response.json();
+        allGames = (Array.isArray(rawGames) ? rawGames.filter(Boolean) : []).map(normalizeGame);
 
         featuredGames = allGames.filter((game) => game.category === "destacados");
         discountGames = allGames.filter((g) => g.category === "descuentos");
 
         renderFeatured();
         renderDiscounts();
-        renderTabbedList(allGames);
+        filterTabs('novedades');
         
         // Initialize section based on URL hash or default to store
         const hash = window.location.hash.replace('#', '');
@@ -155,12 +207,13 @@ function renderDiscounts() {
         return `
         <div class="offer-card ${offerClass}" onmouseenter="showGameTooltip(event, ${game.id})" onmouseleave="hideGameTooltip()">
             <div class="offer-image-container">
-                <img src="${game.main_image}">
+                <img src="${game.main_image}" alt="${game.title}"
+                     onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
             </div>
             <div class="offer-info-box">
                 <p class="offer-type">${offerTitle}</p>
                 <div class="discount-block">
-                    <div class="discount-pct">${game.discount}</div>
+                    <div class="discount-pct">${game.discount || '0%'}</div>
                     <div class="discount-prices">
                         <span class="price-old">${game.original_price}</span>
                         <span class="price-new">${game.final_price}</span>
@@ -181,16 +234,19 @@ function renderTabbedList(listToRender) {
     const listContainer = document.getElementById("main-games-list");
     if (!listContainer) return;
 
-    listContainer.innerHTML = listToRender.slice(0, 10).map(game => `
+    listContainer.innerHTML = listToRender.slice(0, 10).map(game => {
+        const priceHtml = game.category === 'proximos' ? '' : `<div class="game-price">${game.price}</div>`;
+        return `
         <div class="list-item" onmouseover="showPreview(${game.id})">
-            <img src="${game.main_image}" width="120">
-            <div style="flex-grow: 1; margin-left: 10px;">
+            <img src="${game.main_image}" alt="${game.title}" width="120" onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
+            <div class="list-item-meta">
                 <div class="game-name">${game.title}</div>
-                <div style="font-size: 11px; opacity: 0.7;">${game.tag}</div>
+                <div class="game-subtitle">${game.tag}</div>
             </div>
-            <div class="game-price">${game.price}</div>
+            ${priceHtml}
         </div>
-    `).join("");
+    `;
+    }).join("");
 
     if (listToRender.length > 0) showPreview(listToRender[0].id);
 }
@@ -200,52 +256,31 @@ window.showPreview = function (id) {
     const previewContainer = document.getElementById("preview-container");
     if (!game || !previewContainer) return;
 
-    previewContainer.innerHTML = "";
+    const screenshotHTML = game.screenshots.slice(0, 4).map((src) => `
+        <img src="${src}" alt="Captura de ${game.title}" onmouseover="showBigImage('${src}')" onerror="this.onerror=null; this.src='${game.main_image || fallbackThumbnail}'">
+    `).join("");
 
-    const title = document.createElement("h3");
-    title.style.marginTop = "0";
-    title.textContent = game.title;
-
-    const reviewBox = document.createElement("div");
-    reviewBox.style.background = "rgba(0,0,0,0.2)";
-    reviewBox.style.padding = "8px";
-    reviewBox.style.marginBottom = "10px";
-    reviewBox.style.fontSize = "12px";
-    reviewBox.innerHTML = 'Reseñas generales: <span style="color: #66c0f4">Muy positivas</span>';
-
-    const actions = document.createElement("div");
-    actions.style.marginBottom = "15px";
-    actions.style.display = "flex";
-    actions.style.gap = "10px";
-
-    actions.innerHTML = `
-        <button onclick="addToCart(${game.id})" class="btn-steam">Añadir al carro</button>
-        <button onclick="addToWishlist(${game.id})" class="btn-wish">♥</button>
+    const previewPriceHtml = game.category === 'proximos' ? '' : `<div class="preview-price">${game.price}</div>`;
+    previewContainer.innerHTML = `
+        <div class="preview-header">
+            <div>
+                <h3>${game.title}</h3>
+                <div class="preview-tags"><span>${game.tag}</span></div>
+            </div>
+            ${previewPriceHtml}
+        </div>
+        <div class="preview-review-box">
+            <span>Reseñas generales:</span>
+            <strong>${game.review_status}</strong>
+            <span class="review-count">(${game.review_count.toLocaleString()} reseñas)</span>
+        </div>
+        ${game.description ? `<div class="preview-description">${game.description}</div>` : ''}
+        <div class="preview-actions">
+            <button onclick="addToCart(${game.id})" class="btn-steam">Añadir al carrito</button>
+            <button onclick="addToWishlist(${game.id})" class="btn-wish">♥ Favorito</button>
+        </div>
+        <div class="preview-shots">${screenshotHTML}</div>
     `;
-
-    const shotsContainer = document.createElement("div");
-    shotsContainer.className = "preview-shots";
-    shotsContainer.addEventListener("mouseleave", resetBigImage);
-
-    game.screenshots.slice(0, 4).forEach((src) => {
-        const img = document.createElement("img");
-        img.src = src;
-        img.alt = `Captura de ${game.title}`;
-        img.style.width = "100%";
-        img.style.marginBottom = "5px";
-        img.style.borderRadius = "2px";
-        img.addEventListener("mouseover", () => showBigImage(src));
-        img.addEventListener("error", function () {
-            this.onerror = null;
-            this.src = game.main_image;
-        });
-        shotsContainer.appendChild(img);
-    });
-
-    previewContainer.appendChild(title);
-    previewContainer.appendChild(reviewBox);
-    previewContainer.appendChild(actions);
-    previewContainer.appendChild(shotsContainer);
 };
 
 /* =========================================
@@ -275,9 +310,6 @@ window.addToCart = function (id) {
         cart.push(game);
         localStorage.setItem("steam_cart", JSON.stringify(cart));
         window.updateCartUI();
-        alert(`${game.title} añadido al carrito`);
-    } else {
-        alert("Este juego ya está en tu carrito");
     }
 };
 
@@ -286,23 +318,115 @@ window.addToWishlist = function (id) {
     if (game && !wishlist.some(item => item.id === id)) {
         wishlist.push(game);
         localStorage.setItem("steam_wishlist", JSON.stringify(wishlist));
-        alert(`${game.title} añadido a la lista de deseos`);
     }
 };
 
 /* =========================================
    BUSCADOR EN TIEMPO REAL
    ========================================= */
+const searchResultsContainer = document.getElementById('search-results');
+const searchButton = document.getElementById('search-button');
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function findSearchMatches(searchTerm) {
+    const query = (searchTerm || '').trim().toLowerCase();
+    if (!query) return [];
+
+    const exactMatch = (text) => text === query;
+    const startsWith = (text) => text.startsWith(query);
+    const wordBoundary = new RegExp(`\\b${escapeRegExp(query)}`);
+
+    const uniqueById = new Map();
+
+    const matches = allGames.filter((game) => {
+        const title = game.title.toLowerCase();
+        const tag = (game.tag || '').toLowerCase();
+        const description = (game.description || '').toLowerCase();
+
+        return exactMatch(title) ||
+            startsWith(title) ||
+            wordBoundary.test(title) ||
+            wordBoundary.test(tag) ||
+            wordBoundary.test(description);
+    });
+
+    matches.forEach((game) => {
+        if (!uniqueById.has(game.id)) {
+            uniqueById.set(game.id, game);
+        }
+    });
+
+    return Array.from(uniqueById.values());
+}
+
+function renderSearchResults(searchTerm) {
+    const matches = findSearchMatches(searchTerm).slice(0, 6);
+    if (!searchResultsContainer) return;
+
+    if (!matches.length) {
+        if (!searchTerm || !searchTerm.trim()) {
+            searchResultsContainer.style.display = 'none';
+            searchResultsContainer.innerHTML = '';
+            return;
+        }
+        searchResultsContainer.innerHTML = '<div class="search-empty">No se encontraron resultados</div>';
+        searchResultsContainer.style.display = 'block';
+        return;
+    }
+
+    searchResultsContainer.innerHTML = matches.map(game => {
+        const resultPrice = game.category === 'proximos' ? '' : `<div class="search-result-price">${game.price}</div>`;
+        return `
+        <div class="search-result-item" role="option" onclick="handleSearchSelection(${game.id})">
+            <img class="search-result-thumb" src="${game.main_image}" alt="${game.title}">
+            <div class="search-result-meta">
+                <div class="search-result-title">${game.title}</div>
+                <div class="search-result-subtitle">${game.tag} · ${game.category}</div>
+            </div>
+            ${resultPrice}
+        </div>
+    `;
+    }).join('');
+    searchResultsContainer.style.display = 'block';
+}
+
+window.handleSearchSelection = function (id) {
+    showSection('store');
+    showPreview(id);
+    if (searchResultsContainer) {
+        searchResultsContainer.style.display = 'none';
+    }
+};
+
 if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        const filteredResults = allGames.filter((game) =>
-            game.title.toLowerCase().includes(searchTerm) ||
-            game.tag.toLowerCase().includes(searchTerm)
-        );
-        renderTabbedList(filteredResults);
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value;
+        renderSearchResults(searchTerm);
+        const filteredResults = findSearchMatches(searchTerm);
+        renderTabbedList(filteredResults.length ? filteredResults : allGames);
+    });
+    searchInput.addEventListener('focus', (e) => {
+        renderSearchResults(e.target.value);
     });
 }
+
+if (searchButton) {
+    searchButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (searchInput) {
+            renderSearchResults(searchInput.value);
+        }
+    });
+}
+
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.search-container') && searchResultsContainer) {
+        searchResultsContainer.style.display = 'none';
+    }
+});
 
 /* =========================================
    EVENTOS DE NAVEGACIÓN
@@ -330,22 +454,47 @@ document.getElementById("prevOfferBtn").onclick = () => {
 // Iniciar aplicación
 loadGames();
 
+function shuffleArray(array) {
+    const copy = array.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+window.setActiveTab = function (category) {
+    const tabs = document.querySelectorAll('.tab-link');
+    tabs.forEach(tab => {
+        const isActive = tab.getAttribute('onclick')?.includes(`filterTabs('${category}')`);
+        tab.classList.toggle('active', isActive);
+    });
+};
+
 window.filterTabs = function (category) {
     let filteredGames;
     switch (category) {
         case 'novedades':
-            filteredGames = allGames.slice(0, 10); // Primeros 10 juegos
+            filteredGames = shuffleArray(allGames.filter(game => game.category === 'destacados')).slice(0, 10);
             break;
         case 'ventas':
-            filteredGames = allGames.filter(game => game.tag === 'Lo más vendido');
+            filteredGames = shuffleArray(allGames.filter(game =>
+                game.tag.toLowerCase().includes('lo más vendido') ||
+                game.tag.toLowerCase().includes('popular') ||
+                game.category === 'ventas'
+            )).slice(0, 10);
+            if (!filteredGames.length) {
+                filteredGames = shuffleArray(allGames).slice(0, 10);
+            }
             break;
         case 'proximos':
-            filteredGames = allGames.slice(-5); // Últimos 5 juegos como "próximos"
+            filteredGames = allGames.filter(game => game.category === 'proximos');
             break;
         default:
             filteredGames = allGames;
     }
     renderTabbedList(filteredGames);
+    window.setActiveTab(category);
 };
 
 /* =========================================
@@ -377,7 +526,7 @@ window.showGameTooltip = function (event, gameId) {
             </div>
             <div class="tooltip-reviews">
                 Reseñas en Español de España <br>
-                <span class="review-status">Extremadamente positivas</span> (11,205 reseñas)
+                <span class="review-status">${game.review_status}</span> (${game.review_count.toLocaleString()} reseñas)
             </div>
         </div>
     `;

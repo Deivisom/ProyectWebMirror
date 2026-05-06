@@ -37,6 +37,13 @@ async function fix() {
     } catch (err) {
       console.error(`Error updating ${game.title}:`, err.message);
     }
+
+    const currentPrice = game.price && game.price !== 'Gratis' ? game.price : null;
+    const fallbackPrice = game.final_price || game.original_price || (game.category === 'proximos' ? '59,99€' : '29,99€');
+    if (!currentPrice || currentPrice === 'Gratis') {
+      await connection.execute('UPDATE games SET price = ? WHERE id = ?', [fallbackPrice, game.id]);
+      console.log(`Updated price for ${game.title} to ${fallbackPrice}`);
+    }
   }
 
   await connection.end();

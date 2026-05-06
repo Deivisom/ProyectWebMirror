@@ -39,7 +39,7 @@
         <div class="container footer-cta">
             <p>¿Buscando recomendaciones?</p>
             <p class="sub-cta">Inicia sesión para ver recomendaciones personalizadas</p>
-            <a href="#" class="btn-login-footer">Iniciar sesión</a>
+            <a href="login.html" class="btn-login-footer">Iniciar sesión</a>
             <p class="register-text">O <a href="#">regístrate</a> y únete a Steam de forma gratuita</p>
         </div>
     </footer>
@@ -84,9 +84,6 @@
             if (game && !cart.some(item => item.id === id)) {
                 cart.push(game);
                 localStorage.setItem("steam_cart", JSON.stringify(cart));
-                alert(`${game.title} añadido al carrito`);
-            } else {
-                alert("Este juego ya está en tu carrito");
             }
         }
 
