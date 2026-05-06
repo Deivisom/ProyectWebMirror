@@ -561,11 +561,8 @@
                 setCurrentUser(data.user);
                 setToken(data.token);
 
-                showLoggedInView(data.user);
-
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 500);
+                // Redirección inmediata sin mostrar el panel intermedio
+                window.location.href = 'index.html';
 
             } catch (error) {
                 console.error('Error en login:', error);

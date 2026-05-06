@@ -57,7 +57,7 @@
                         
                         <!-- Dropdown Menu -->
                         <div id="profile-dropdown" class="profile-dropdown-content">
-                            <a href="admin.html" id="dropdown-admin-link">Panel de administración</a>
+                            <a href="admin.html" id="dropdown-admin-link" style="display: none;">Panel de administración</a>
                             <a href="#" id="dropdown-logout-link">Cerrar sesión</a>
                         </div>
                     </div>
@@ -595,8 +595,14 @@
                     if (footerGuest) footerGuest.setAttribute('style', 'display: none !important;');
                     if (footerUser) footerUser.style.display = 'block';
                     
-                    // Siempre mostrar soporte para cualquier usuario logueado
-                    if (supportMenuItem) supportMenuItem.style.display = 'inline-block';
+                    // Configurar visibilidad según ROL
+                    if (currentUser.role === 'admin') {
+                        if (supportMenuItem) supportMenuItem.style.display = 'inline-block';
+                        if (dropdownAdminLink) dropdownAdminLink.style.display = 'block';
+                    } else {
+                        if (supportMenuItem) supportMenuItem.style.display = 'none';
+                        if (dropdownAdminLink) dropdownAdminLink.style.display = 'none';
+                    }
 
                     // Toggle dropdown
                     if (dropdownTrigger && dropdownMenu) {

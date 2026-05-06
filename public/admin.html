@@ -12,8 +12,9 @@
 <body>
     <script>
         const currentAdminUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
-        if (!currentAdminUser) {
-            window.location.href = 'login.html';
+        if (!currentAdminUser || currentAdminUser.role !== 'admin') {
+            alert('Acceso denegado. Se requieren permisos de administrador.');
+            window.location.href = 'index.html';
         }
     </script>
     <header class="bg-dark text-white p-3">
