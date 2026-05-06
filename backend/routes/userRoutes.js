@@ -1,14 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
-const userController = require('../controllers/userController');
+const userActionsController = require('../controllers/userActionsController');
+const { verifyToken } = require('../middleware/authMiddleware');
 
-router.get('/cart', authMiddleware.verifyToken, userController.getCart);
-router.post('/cart', authMiddleware.verifyToken, userController.addCartItem);
-router.delete('/cart/:gameId', authMiddleware.verifyToken, userController.removeCartItem);
+// Rutas protegidas para el carrito
+router.get('/cart', verifyToken, userActionsController.getCart);
+router.post('/cart', verifyToken, userActionsController.addToCart);
+router.delete('/cart/:gameId', verifyToken, userActionsController.removeFromCart);
 
-router.get('/favorites', authMiddleware.verifyToken, userController.getFavorites);
-router.post('/favorites', authMiddleware.verifyToken, userController.addFavorite);
-router.delete('/favorites/:gameId', authMiddleware.verifyToken, userController.removeFavorite);
+// Rutas protegidas para favoritos
+router.get('/favorites', verifyToken, userActionsController.getWishlist);
+router.post('/favorites', verifyToken, userActionsController.addToWishlist);
+router.delete('/favorites/:gameId', verifyToken, userActionsController.removeFromWishlist);
 
 module.exports = router;

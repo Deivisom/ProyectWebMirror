@@ -618,6 +618,8 @@
                             e.preventDefault();
                             localStorage.removeItem('steam_current_user');
                             localStorage.removeItem('steam_jwt_token');
+                            localStorage.removeItem('steam_cart');
+                            localStorage.removeItem('steam_wishlist');
                             window.location.reload();
                         });
                     }
