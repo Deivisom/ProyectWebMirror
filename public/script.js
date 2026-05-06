@@ -216,7 +216,7 @@ function renderFeatured() {
 
     const thumbsHTML = game.screenshots
         .map((img, index) => `
-            <div class="thumb">
+            <div class="thumb" onmouseenter="changeBigImage('${img}')">
                 <img src="${img}"
                      alt="Captura ${index + 1} de ${game.title}">
             </div>
@@ -683,11 +683,13 @@ document.addEventListener('click', (event) => {
 document.getElementById("nextBtn").onclick = () => {
     currentIndex = (currentIndex + 1) % featuredGames.length;
     renderFeatured();
+    startCarouselTimer();
 };
 
 document.getElementById("prevBtn").onclick = () => {
     currentIndex = (currentIndex - 1 + featuredGames.length) % featuredGames.length;
     renderFeatured();
+    startCarouselTimer();
 };
 
 document.getElementById("nextOfferBtn").onclick = () => {
@@ -702,6 +704,51 @@ document.getElementById("prevOfferBtn").onclick = () => {
 
 // Iniciar aplicación
 loadGames();
+
+/* =========================================
+   AUTO-PLAY DEL CARRUSEL
+   ========================================= */
+let carouselTimer;
+
+function startCarouselTimer() {
+    stopCarouselTimer();
+    carouselTimer = setInterval(() => {
+        if (featuredGames.length > 0) {
+            currentIndex = (currentIndex + 1) % featuredGames.length;
+            renderFeatured();
+        }
+    }, 5000); // Cambia cada 5 segundos
+}
+
+function stopCarouselTimer() {
+    if (carouselTimer) clearInterval(carouselTimer);
+}
+
+// Pausar al pasar el ratón por el carrusel
+const carouselContainer = document.getElementById('carousel-content');
+if (carouselContainer) {
+    carouselContainer.addEventListener('mouseenter', stopCarouselTimer);
+    carouselContainer.addEventListener('mouseleave', startCarouselTimer);
+}
+
+// Iniciar el temporizador una vez cargados los juegos
+window.addEventListener('load', () => {
+    startCarouselTimer();
+});
+
+window.changeBigImage = function (src) {
+    const mainImg = document.getElementById("main-img");
+    if (mainImg) {
+        mainImg.src = src;
+    }
+};
+
+window.resetBigImage = function () {
+    const mainImg = document.getElementById("main-img");
+    if (mainImg) {
+        mainImg.src = mainImg.dataset.original;
+    }
+};
 
 function shuffleArray(array) {
     const copy = array.slice();
