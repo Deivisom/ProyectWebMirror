@@ -424,6 +424,7 @@
 
                         <div class="help-links">
                             <a href="#">Ayuda, no puedo iniciar sesión</a>
+                            <a href="register.html">¿No tienes cuenta? Regístrate</a>
                         </div>
                     </form>
                 </div>
@@ -540,6 +541,18 @@
 
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
+
+            if (username.length < 4) {
+                errorMsg.textContent = 'El nombre de usuario debe tener al menos 4 caracteres.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMsg.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                errorMsg.style.display = 'block';
+                return;
+            }
 
             try {
                 const response = await fetch('/api/auth/login', {

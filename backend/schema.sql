@@ -2,10 +2,19 @@
 CREATE DATABASE IF NOT EXISTS steam;
 USE steam;
 
--- Tabla de juegos
+-- Desactivar temporalmente las comprobaciones de claves foráneas para limpiar tablas antiguas
+SET FOREIGN_KEY_CHECKS = 0;
 
+DROP TABLE IF EXISTS cart_items;
+DROP TABLE IF EXISTS favorite_items;
+DROP TABLE IF EXISTS favorites;
+DROP TABLE IF EXISTS cart;
 DROP TABLE IF EXISTS games;
 DROP TABLE IF EXISTS users;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- Tablas relacionadas y tabla de juegos
 
 CREATE TABLE IF NOT EXISTS games (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,8 +83,27 @@ INSERT INTO games (title, category, tag, main_image, price, original_price, fina
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(255) DEFAULT NULL,
     password VARCHAR(255) NOT NULL, -- Guardaremos el hash de bcrypt
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
+);
+
+CREATE TABLE IF NOT EXISTS cart_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    UNIQUE KEY user_game_cart_unique (user_id, game_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS favorite_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    UNIQUE KEY user_game_favorite_unique (user_id, game_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
 );
 
 -- Insertar usuarios de prueba (contraseña '1234' hasheada con bcrypt)

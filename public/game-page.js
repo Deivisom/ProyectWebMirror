@@ -65,8 +65,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 5. Botón de deseados
         const btnWish = document.getElementById('btn-add-wishlist');
         if (btnWish) {
-            btnWish.addEventListener('click', () => {
+            btnWish.addEventListener('click', async () => {
                 let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
+                const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+
+                if (currentUser) {
+                    try {
+                        await fetch('/api/users/favorites', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token')
+                            },
+                            body: JSON.stringify({ gameId: game.id })
+                        });
+                        wishlist = await fetch('/api/users/favorites', {
+                            headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                        }).then(r => r.ok ? r.json() : []);
+                        localStorage.setItem("steam_wishlist", JSON.stringify(wishlist));
+                        alert(`${game.title} añadido a tu lista de deseados.`);
+                        return;
+                    } catch (error) {
+                        console.warn('Error guardando favorito en servidor:', error);
+                    }
+                }
+
                 if (!wishlist.some(item => item.id === game.id)) {
                     wishlist.push(game);
                     localStorage.setItem("steam_wishlist", JSON.stringify(wishlist));
@@ -80,13 +103,39 @@ document.addEventListener('DOMContentLoaded', async () => {
         // 6. Botón de Añadir al Carro
         const btnCart = document.querySelector('.btn-add-cart');
         if (btnCart) {
-            btnCart.addEventListener('click', () => {
+            btnCart.addEventListener('click', async () => {
                 let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
+                const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+
+                if (currentUser) {
+                    try {
+                        await fetch('/api/users/cart', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token')
+                            },
+                            body: JSON.stringify({ gameId: game.id })
+                        });
+                        cart = await fetch('/api/users/cart', {
+                            headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                        }).then(r => r.ok ? r.json() : []);
+                        localStorage.setItem("steam_cart", JSON.stringify(cart));
+                        alert(`${game.title} añadido al carrito.`);
+                        const cartCount = document.getElementById('cart-count');
+                        if (cartCount) cartCount.textContent = cart.length;
+                        const cartBtn = document.getElementById('cart-button');
+                        if (cartBtn) cartBtn.style.display = 'flex';
+                        return;
+                    } catch (error) {
+                        console.warn('Error guardando carrito en servidor:', error);
+                    }
+                }
+
                 if (!cart.some(item => item.id === game.id)) {
                     cart.push(game);
                     localStorage.setItem("steam_cart", JSON.stringify(cart));
                     alert(`${game.title} añadido al carrito.`);
-                    // Intentar actualizar el contador si existe en el header
                     const cartCount = document.getElementById('cart-count');
                     if (cartCount) cartCount.textContent = cart.length;
                     const cartBtn = document.getElementById('cart-button');

@@ -631,12 +631,25 @@
                     if (supportMenuItem) supportMenuItem.style.display = 'none';
                 }
 
+                updateProfileSection(currentUser);
+
                 // Cerrar dropdown al hacer click fuera
                 window.addEventListener('click', () => {
                     if (dropdownMenu && dropdownMenu.classList.contains('show')) {
                         dropdownMenu.classList.remove('show');
                     }
                 });
+
+                function updateProfileSection(user) {
+                    if (!user) return;
+                    const personaName = document.querySelector('.persona-name');
+                    const profileStatus = document.querySelector('.profile-status');
+                    const avatar = document.querySelector('.main-avatar');
+
+                    if (personaName) personaName.textContent = user.username;
+                    if (profileStatus) profileStatus.textContent = 'En línea · Español';
+                    if (avatar) avatar.src = './img/profile/benny.jpg';
+                }
             });
         </script>
 </body>

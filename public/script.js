@@ -15,6 +15,45 @@ const searchInput = document.getElementById("search-input");
 
 const fallbackThumbnail = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22231%22%20height%3D%2287%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23222%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%23ccc%22%20font-size%3D%2214%22%20font-family%3D%22Arial%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%3E%3C%2Ftext%3E%3C%2Fsvg%3E';
 
+function getCurrentUser() {
+    try {
+        return JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+    } catch (error) {
+        return null;
+    }
+}
+
+function getAuthHeaders() {
+    const token = localStorage.getItem('steam_jwt_token');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+async function syncUserData() {
+    const user = getCurrentUser();
+    if (!user) return;
+
+    try {
+        const [cartResponse, wishlistResponse] = await Promise.all([
+            fetch('/api/users/cart', { headers: getAuthHeaders() }),
+            fetch('/api/users/favorites', { headers: getAuthHeaders() })
+        ]);
+
+        if (cartResponse.ok) {
+            cart = await cartResponse.json();
+            localStorage.setItem('steam_cart', JSON.stringify(cart));
+        }
+
+        if (wishlistResponse.ok) {
+            wishlist = await wishlistResponse.json();
+            localStorage.setItem('steam_wishlist', JSON.stringify(wishlist));
+        }
+
+        window.updateCartUI();
+    } catch (error) {
+        console.warn('No se pudo sincronizar datos de usuario:', error);
+    }
+}
+
 function goToGamePage(id) {
     window.location.href = `game.html?id=${id}`;
 }
@@ -125,6 +164,7 @@ async function loadGames() {
         featuredGames = allGames.filter((game) => game.category === "destacados");
         discountGames = allGames.filter((g) => g.category === "descuentos");
 
+        await syncUserData();
         renderFeatured();
         renderDiscounts();
         filterTabs('novedades');
@@ -305,18 +345,67 @@ window.addEventListener('DOMContentLoaded', () => {
     window.updateCartUI();
 });
 
-window.addToCart = function (id) {
+window.addToCart = async function (id) {
     const game = allGames.find(g => g.id === id);
-    if (game && !cart.some(item => item.id === id)) {
+    const user = getCurrentUser();
+
+    if (!game) return;
+
+    if (user) {
+        try {
+            const response = await fetch('/api/users/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeaders()
+                },
+                body: JSON.stringify({ gameId: id })
+            });
+            if (response.ok) {
+                cart = await fetch('/api/users/cart', { headers: getAuthHeaders() }).then(r => r.json());
+                localStorage.setItem('steam_cart', JSON.stringify(cart));
+                window.updateCartUI();
+                return;
+            }
+        } catch (error) {
+            console.warn('Error guardando carrito en servidor:', error);
+        }
+    }
+
+    if (!cart.some(item => item.id === id)) {
         cart.push(game);
         localStorage.setItem("steam_cart", JSON.stringify(cart));
         window.updateCartUI();
     }
 };
 
-window.addToWishlist = function (id) {
+window.addToWishlist = async function (id) {
     const game = allGames.find(g => g.id === id);
-    if (game && !wishlist.some(item => item.id === id)) {
+    const user = getCurrentUser();
+
+    if (!game) return;
+
+    if (user) {
+        try {
+            const response = await fetch('/api/users/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...getAuthHeaders()
+                },
+                body: JSON.stringify({ gameId: id })
+            });
+            if (response.ok) {
+                wishlist = await fetch('/api/users/favorites', { headers: getAuthHeaders() }).then(r => r.json());
+                localStorage.setItem('steam_wishlist', JSON.stringify(wishlist));
+                return;
+            }
+        } catch (error) {
+            console.warn('Error guardando favoritos en servidor:', error);
+        }
+    }
+
+    if (!wishlist.some(item => item.id === id)) {
         wishlist.push(game);
         localStorage.setItem("steam_wishlist", JSON.stringify(wishlist));
     }
@@ -515,15 +604,16 @@ window.showGameTooltip = function (event, gameId) {
     const game = allGames.find(g => g.id === gameId);
     if (!game) return;
 
+    const shots = Array.isArray(game.screenshots) ? game.screenshots.filter(Boolean) : [];
+    const firstShot = shots.length > 0 ? shots[0] : game.main_image;
     let shotIndex = 0;
-    const maxShots = game.screenshots ? game.screenshots.length : 0;
-    const firstShot = maxShots > 0 ? game.screenshots[0] : game.main_image;
+    const maxShots = shots.length;
 
     tooltipContainer.innerHTML = `
         <div class="tooltip-content">
             <h4 class="tooltip-title">${game.title}</h4>
             <div class="tooltip-shot-container">
-                <img id="tooltip-shot" src="${firstShot}" alt="Screenshot">
+                <img id="tooltip-shot" src="${firstShot}" alt="Screenshot" onerror="this.onerror=null; this.src='${fallbackThumbnail}'">
             </div>
             <div class="tooltip-reviews">
                 Reseñas en Español de España <br>
@@ -560,7 +650,7 @@ window.showGameTooltip = function (event, gameId) {
             shotIndex = (shotIndex + 1) % maxShots;
             const imgEl = document.getElementById("tooltip-shot");
             if (imgEl) {
-                imgEl.src = game.screenshots[shotIndex];
+                imgEl.src = shots[shotIndex] || firstShot;
             }
         }, 1500);
     }

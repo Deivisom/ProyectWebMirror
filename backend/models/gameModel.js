@@ -16,21 +16,48 @@ function parseScreenshots(row) {
   return row;
 }
 
-async function findAll({ page, limit }) {
+function buildSearchQuery({ search, category }) {
+  const filters = [];
+  const params = [];
+
+  if (category) {
+    filters.push('category = ?');
+    params.push(category);
+  }
+
+  if (search) {
+    const searchTerm = `%${search}%`;
+    filters.push('(title LIKE ? OR tag LIKE ?)');
+    params.push(searchTerm, searchTerm);
+  }
+
+  return {
+    whereClause: filters.length ? `WHERE ${filters.join(' AND ')}` : '',
+    params
+  };
+}
+
+async function findAll({ page, limit, search, category }) {
+  const { whereClause, params } = buildSearchQuery({ search, category });
+
   if (page !== undefined || limit !== undefined) {
     const pageNumber = Number.isNaN(parseInt(page, 10)) ? 1 : parseInt(page, 10);
     const limitNumber = Number.isNaN(parseInt(limit, 10)) ? 10 : parseInt(limit, 10);
     const offset = (pageNumber - 1) * limitNumber;
-    const [rows] = await pool.query(`SELECT * FROM games LIMIT ${limitNumber} OFFSET ${offset}`);
+    const [rows] = await pool.query(
+      `SELECT * FROM games ${whereClause} LIMIT ? OFFSET ?`,
+      [...params, limitNumber, offset]
+    );
     return rows.map(parseScreenshots);
   }
 
-  const [rows] = await pool.query('SELECT * FROM games');
+  const [rows] = await pool.query(`SELECT * FROM games ${whereClause}`, params);
   return rows.map(parseScreenshots);
 }
 
-async function countAll() {
-  const [rows] = await pool.query('SELECT COUNT(*) AS total FROM games');
+async function countAll({ search, category } = {}) {
+  const { whereClause, params } = buildSearchQuery({ search, category });
+  const [rows] = await pool.query(`SELECT COUNT(*) AS total FROM games ${whereClause}`, params);
   return rows[0]?.total || 0;
 }
 

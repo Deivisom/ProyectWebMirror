@@ -13,13 +13,13 @@ async function seedUsers() {
     await pool.query('DELETE FROM users');
 
     await pool.query(
-      'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-      ['admin', hash, 'admin']
+      'INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)',
+      ['admin', hash, 'admin', null]
     );
 
     await pool.query(
-      'INSERT INTO users (username, password, role) VALUES (?, ?, ?)',
-      ['akn.raouia', hash, 'user']
+      'INSERT INTO users (username, password, role, email) VALUES (?, ?, ?, ?)',
+      ['akn.raouia', hash, 'user', null]
     );
 
     console.log('Usuarios creados exitosamente:');

@@ -5,7 +5,9 @@ function parsePagination(query) {
   const limit = query.limit !== undefined ? parseInt(query.limit, 10) : undefined;
   return {
     page: Number.isNaN(page) ? undefined : page,
-    limit: Number.isNaN(limit) ? undefined : limit
+    limit: Number.isNaN(limit) ? undefined : limit,
+    search: typeof query.search === 'string' ? query.search.trim() : undefined,
+    category: typeof query.category === 'string' ? query.category.trim() : undefined
   };
 }
 
@@ -20,11 +22,11 @@ function validateGamePayload(body) {
 
 async function getGames(req, res) {
   try {
-    const { page, limit } = parsePagination(req.query);
-    const games = await gameModel.findAll({ page, limit });
+    const { page, limit, search, category } = parsePagination(req.query);
+    const games = await gameModel.findAll({ page, limit, search, category });
 
     if (page !== undefined || limit !== undefined) {
-      const total = await gameModel.countAll();
+      const total = await gameModel.countAll({ search, category });
       return res.json({ games, total, page: page || 1, limit: limit || 10 });
     }
 

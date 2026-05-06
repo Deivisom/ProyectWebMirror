@@ -7,6 +7,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const gameRoutes = require('./routes/gameRoutes');
+const userRoutes = require('./routes/userRoutes');
 const authController = require('./controllers/authController');
 
 app.use(cors());
@@ -16,7 +17,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 const publicPath = path.join(__dirname, '..', 'public');
 
 app.use('/api/games', gameRoutes);
+app.use('/api/users', userRoutes);
 app.post('/api/auth/login', authController.login);
+app.post('/api/auth/register', authController.register);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
@@ -31,7 +34,8 @@ const pageRoutes = {
   login_page2: 'login_page2.html',
   login_page_content: 'login_page_content.html',
   steam_login_temp: 'steam_login_temp.html',
-  steamcommunity_login: 'steamcommunity_login.html'
+  steamcommunity_login: 'steamcommunity_login.html',
+  register: 'register.html'
 };
 
 app.get('/:page', (req, res, next) => {

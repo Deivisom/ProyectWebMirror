@@ -166,7 +166,7 @@
 
             // Actualizar carrito al cargar
             renderCartUI();
-            renderWishlist();
+            loadWishlist();
         });
 
         function renderCartUI() {
@@ -181,9 +181,24 @@
             }
         }
 
-        function renderWishlist() {
+        async function loadWishlist() {
             const wishlistContainer = document.getElementById("wishlist-container");
-            const wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
+            let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
+            const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+
+            if (currentUser) {
+                try {
+                    const response = await fetch('/api/users/favorites', {
+                        headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                    });
+                    if (response.ok) {
+                        wishlist = await response.json();
+                        localStorage.setItem('steam_wishlist', JSON.stringify(wishlist));
+                    }
+                } catch (error) {
+                    console.warn('No se pudo cargar favoritos desde el servidor:', error);
+                }
+            }
 
             if (wishlist.length === 0) {
                 wishlistContainer.innerHTML = `
@@ -215,18 +230,61 @@
             `).join("");
         }
 
-        function removeFromWishlist(id) {
+        async function removeFromWishlist(id) {
+            const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
             let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
+
+            if (currentUser) {
+                try {
+                    await fetch(`/api/users/favorites/${id}`, {
+                        method: 'DELETE',
+                        headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                    });
+                    wishlist = wishlist.filter(game => game.id !== id);
+                    localStorage.setItem('steam_wishlist', JSON.stringify(wishlist));
+                    await loadWishlist();
+                    return;
+                } catch (error) {
+                    console.warn('No se pudo eliminar favorito en el servidor:', error);
+                }
+            }
+
             wishlist = wishlist.filter(game => game.id !== id);
             localStorage.setItem("steam_wishlist", JSON.stringify(wishlist));
-            renderWishlist();
+            renderCartUI();
+            loadWishlist();
         }
 
-        function addToCartFromWishlist(id) {
+        async function addToCartFromWishlist(id) {
             let wishlist = JSON.parse(localStorage.getItem("steam_wishlist")) || [];
             let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
             const game = wishlist.find(g => g.id === id);
-            
+            const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+
+            if (!game) return;
+
+            if (currentUser) {
+                try {
+                    await fetch('/api/users/cart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token')
+                        },
+                        body: JSON.stringify({ gameId: id })
+                    });
+                    cart = await fetch('/api/users/cart', {
+                        headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                    }).then(r => r.ok ? r.json() : []);
+                    localStorage.setItem("steam_cart", JSON.stringify(cart));
+                    renderCartUI();
+                    alert(`${game.title} añadido al carrito.`);
+                    return;
+                } catch (error) {
+                    console.warn('No se pudo añadir al carrito en el servidor:', error);
+                }
+            }
+
             if (game && !cart.some(item => item.id === id)) {
                 cart.push(game);
                 localStorage.setItem("steam_cart", JSON.stringify(cart));

@@ -115,9 +115,17 @@
     </footer>
 
     <script>
+        function safeParseJSON(value, fallback = []) {
+            try {
+                return JSON.parse(value);
+            } catch (error) {
+                return fallback;
+            }
+        }
+
         // Lógica de sesión idéntica a index.html
         document.addEventListener('DOMContentLoaded', () => {
-            const currentUser = JSON.parse(localStorage.getItem('steam_current_user') || 'null');
+            const currentUser = safeParseJSON(localStorage.getItem('steam_current_user'), null);
             const headerLogin = document.getElementById('header-login-container');
             const headerUser = document.getElementById('header-user-container');
             const displayUsername = document.getElementById('display-username');
@@ -156,29 +164,43 @@
                 if (headerUser) headerUser.style.display = 'none';
             }
 
-            renderCart();
+            loadCartAndRender();
         });
 
-        function renderCart() {
-            const cartContainer = document.getElementById("cart-container");
-            const totalValueEl = document.getElementById("cart-total-value");
-            let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
+        async function loadCartAndRender() {
+            const cartContainer = document.getElementById('cart-container');
+            const totalValueEl = document.getElementById('cart-total-value');
+            let cart = safeParseJSON(localStorage.getItem('steam_cart'), []);
+            const currentUser = safeParseJSON(localStorage.getItem('steam_current_user'), null);
 
-            if (cart.length === 0) {
+            if (currentUser) {
+                try {
+                    const response = await fetch('/api/users/cart', {
+                        headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                    });
+                    if (response.ok) {
+                        cart = await response.json();
+                        localStorage.setItem('steam_cart', JSON.stringify(cart));
+                    }
+                } catch (error) {
+                    console.warn('No se pudo cargar el carrito desde el servidor:', error);
+                }
+            }
+
+            if (!cart || !cart.length) {
                 cartContainer.innerHTML = `
                     <div style="background: rgba(0,0,0,0.2); padding: 40px; text-align: center; color: #8f98a0; border-radius: 4px;">
                         <p style="font-size: 18px; margin-bottom: 10px;">Tu carro está vacío.</p>
                         <a href="index.html" style="color: #66c0f4; text-decoration: none;">Continuar comprando</a>
                     </div>
                 `;
-                totalValueEl.textContent = "0,00€";
+                totalValueEl.textContent = '0,00€';
                 return;
             }
 
             let total = 0;
             cartContainer.innerHTML = cart.map(game => {
-                // Limpiar el precio para sumar (ej: "29,99€" -> 29.99)
-                let pStr = game.final_price || game.price || "0";
+                let pStr = game.final_price || game.price || '0';
                 let cleanPrice = parseFloat(pStr.replace('€', '').replace(',', '.').trim());
                 if (!isNaN(cleanPrice)) total += cleanPrice;
 
@@ -195,23 +217,39 @@
                         </div>
                     </div>
                 `;
-            }).join("");
+            }).join('');
 
-            totalValueEl.textContent = total.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + "€";
+            totalValueEl.textContent = total.toLocaleString('es-ES', { minimumFractionDigits: 2 }) + '€';
         }
 
-        function removeFromCart(id) {
-            let cart = JSON.parse(localStorage.getItem("steam_cart")) || [];
+        async function removeFromCart(id) {
+            const currentUser = safeParseJSON(localStorage.getItem('steam_current_user'), null);
+            let cart = safeParseJSON(localStorage.getItem('steam_cart'), []);
+
+            if (currentUser) {
+                try {
+                    await fetch(`/api/users/cart/${id}`, {
+                        method: 'DELETE',
+                        headers: { Authorization: 'Bearer ' + localStorage.getItem('steam_jwt_token') }
+                    });
+                    cart = cart.filter(game => game.id !== id);
+                    localStorage.setItem('steam_cart', JSON.stringify(cart));
+                    await loadCartAndRender();
+                    return;
+                } catch (error) {
+                    console.warn('No se pudo eliminar el artículo del servidor:', error);
+                }
+            }
+
             cart = cart.filter(game => game.id !== id);
-            localStorage.setItem("steam_cart", JSON.stringify(cart));
-            renderCart();
-            // Actualizar el header si estamos en la misma página (aunque aquí no se ve el contador si no refrescas)
+            localStorage.setItem('steam_cart', JSON.stringify(cart));
+            loadCartAndRender();
         }
 
-        document.getElementById("checkout-btn").onclick = () => {
-            alert("¡Gracias por tu compra simulada! Tu pedido ha sido procesado.");
-            localStorage.removeItem("steam_cart");
-            renderCart();
+        document.getElementById('checkout-btn').onclick = () => {
+            alert('¡Gracias por tu compra simulada! Tu pedido ha sido procesado.');
+            localStorage.removeItem('steam_cart');
+            loadCartAndRender();
         };
     </script>
 </body>
