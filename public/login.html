@@ -34,6 +34,12 @@
             margin-top: 15px;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
         .login-header img {
             width: 170px;
             display: block;
@@ -43,7 +49,6 @@
             display: flex;
             gap: 18px;
             align-items: center;
-            margin-left: 28px;
         }
 
         .header-nav a,
@@ -323,10 +328,14 @@
                 gap: 16px;
             }
 
+            .header-left {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .header-nav {
                 flex-wrap: wrap;
                 gap: 12px;
-                margin-left: 0;
             }
 
             .login-panel-left,
@@ -345,15 +354,16 @@
     <div class="header-left">
       <img src="https://store.cloudflare.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam Logo">
       <nav class="header-nav">
-        <a href="#">TIENDA</a>
+        <a href="index.html">TIENDA</a>
         <a href="#">COMUNIDAD</a>
         <a href="#">ACERCA DE</a>
-        <a href="#">SOPORTE</a>
+        <a href="admin.html" id="supportHeaderLink" style="display:none;">SOPORTE</a>
       </nav>
     </div>
+
     <div class="header-actions">
       <a href="login.html" class="header-btn active">Iniciar sesión</a>
-      <a href="/admin" class="header-btn">SOPORTE</a>
+      <a href="admin.html" id="supportButton" class="header-btn" style="display:none;">SOPORTE</a>
     </div>
   </header>
 
@@ -374,9 +384,18 @@
           </div>
 
           <div id="loggedInBox" class="login-container" style="display:none; padding: 30px 40px; text-align:center;">
-            <p style="margin-bottom: 18px; font-size: 16px; color: #d3dbe0;">Ya has iniciado sesión como <strong id="statusUsername"></strong>.</p>
-            <button id="logoutButton" class="btn-submit" style="background: #e30000; margin-bottom: 10px;">Cerrar sesión</button>
-            <button id="goHomeButton" class="btn-submit" style="background: #2d73ff;">Volver a Steam</button>
+            <p style="margin-bottom: 18px; font-size: 16px; color: #d3dbe0;">
+                Ya has iniciado sesión como <strong id="statusUsername"></strong>.
+            </p>
+            <button id="goAdminButton" class="btn-submit" style="background: #2d73ff; margin-bottom: 10px; display:none;">
+                Ir al panel soporte
+            </button>
+            <button id="logoutButton" class="btn-submit" style="background: #e30000; margin-bottom: 10px;">
+                Cerrar sesión
+            </button>
+            <button id="goHomeButton" class="btn-submit" style="background: #2d73ff;">
+                Volver a Steam
+            </button>
           </div>
 
           <form id="loginForm">
@@ -425,83 +444,145 @@
   </footer>
 
   <script>
-        const validUser = 'akn.raouia';
-        const validPass = '1234';
-        const currentUserKey = 'steam_current_user';
+    const ADMIN_USERNAME = 'akn.raouia';
 
-        const loginForm = document.getElementById('loginForm');
-        const loggedInBox = document.getElementById('loggedInBox');
-        const statusUsername = document.getElementById('statusUsername');
-        const logoutButton = document.getElementById('logoutButton');
-        const goHomeButton = document.getElementById('goHomeButton');
-        const errorMsg = document.getElementById('errorMessage');
+    const currentUserKey = 'steam_current_user';
+    const tokenKey = 'steam_jwt_token';
 
-        function getCurrentUser() {
-            try {
-                return JSON.parse(localStorage.getItem(currentUserKey));
-            } catch (e) {
-                return null;
-            }
+    const loginForm = document.getElementById('loginForm');
+    const loggedInBox = document.getElementById('loggedInBox');
+    const statusUsername = document.getElementById('statusUsername');
+    const logoutButton = document.getElementById('logoutButton');
+    const goHomeButton = document.getElementById('goHomeButton');
+    const goAdminButton = document.getElementById('goAdminButton');
+    const errorMsg = document.getElementById('errorMessage');
+    const supportHeaderLink = document.getElementById('supportHeaderLink');
+    const supportButton = document.getElementById('supportButton');
+
+    function getCurrentUser() {
+        try {
+            return JSON.parse(localStorage.getItem(currentUserKey) || 'null');
+        } catch (e) {
+            return null;
         }
+    }
 
-        function setCurrentUser(user) {
-            localStorage.setItem(currentUserKey, JSON.stringify(user));
+    function setCurrentUser(user) {
+        localStorage.setItem(currentUserKey, JSON.stringify(user));
+    }
+
+    function setToken(token) {
+        localStorage.setItem(tokenKey, token);
+    }
+
+    function clearSession() {
+        localStorage.removeItem(currentUserKey);
+        localStorage.removeItem(tokenKey);
+    }
+
+    function isAdmin(user) {
+        return user && user.username === ADMIN_USERNAME;
+    }
+
+    function updateSupportLinks(user) {
+        if (isAdmin(user)) {
+            if (supportHeaderLink) supportHeaderLink.style.display = 'inline-block';
+            if (supportButton) supportButton.style.display = 'inline-block';
+            if (goAdminButton) goAdminButton.style.display = 'inline-block';
+        } else {
+            if (supportHeaderLink) supportHeaderLink.style.display = 'none';
+            if (supportButton) supportButton.style.display = 'none';
+            if (goAdminButton) goAdminButton.style.display = 'none';
         }
+    }
 
-        function clearCurrentUser() {
-            localStorage.removeItem(currentUserKey);
-        }
+    function showLoggedInView(user) {
+        loginForm.style.display = 'none';
+        loggedInBox.style.display = 'block';
+        statusUsername.textContent = user.username;
+        errorMsg.style.display = 'none';
+        updateSupportLinks(user);
+    }
 
-        function showLoggedInView(user) {
-            loginForm.style.display = 'none';
-            loggedInBox.style.display = 'block';
-            statusUsername.textContent = user.username;
-            errorMsg.style.display = 'none';
-        }
+    function showLoginForm() {
+        loginForm.style.display = 'block';
+        loggedInBox.style.display = 'none';
+        errorMsg.style.display = 'none';
 
-        function showLoginForm() {
-            loginForm.style.display = 'block';
-            loggedInBox.style.display = 'none';
-            errorMsg.style.display = 'none';
-            document.getElementById('username').value = validUser;
-            document.getElementById('password').value = '';
-            document.getElementById('username').focus();
-        }
+        document.getElementById('username').value = ADMIN_USERNAME;
+        document.getElementById('password').value = '';
+        document.getElementById('username').focus();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const user = getCurrentUser();
-            if (user && user.username) {
-                showLoggedInView(user);
-            } else {
-                showLoginForm();
-            }
-        });
+        updateSupportLinks(null);
+    }
 
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+    document.addEventListener('DOMContentLoaded', () => {
+        const user = getCurrentUser();
+        const token = localStorage.getItem(tokenKey);
 
-            const user = document.getElementById('username').value.trim();
-            const pass = document.getElementById('password').value;
-
-            if (user.toLowerCase() === validUser && pass === validPass) {
-                setCurrentUser({ username: validUser });
-                showLoggedInView({ username: validUser });
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 500);
-            } else {
-                errorMsg.style.display = 'block';
-            }
-        });
-
-        logoutButton.addEventListener('click', function() {
-            clearCurrentUser();
+        if (user && user.username && token) {
+            showLoggedInView(user);
+        } else {
+            clearSession();
             showLoginForm();
-        });
+        }
+    });
 
-        goHomeButton.addEventListener('click', function() {
-            window.location.href = 'index.html';
-        });
-    </script>
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                errorMsg.textContent = data.error || 'Nombre de cuenta o contraseña incorrectos.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            setCurrentUser(data.user);
+            setToken(data.token);
+
+            showLoggedInView(data.user);
+
+            setTimeout(() => {
+                if (isAdmin(data.user)) {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            }, 500);
+
+        } catch (error) {
+            console.error('Error en login:', error);
+            errorMsg.textContent = 'Error al conectar con el servidor.';
+            errorMsg.style.display = 'block';
+        }
+    });
+
+    logoutButton.addEventListener('click', function() {
+        clearSession();
+        showLoginForm();
+    });
+
+    goHomeButton.addEventListener('click', function() {
+        window.location.href = 'index.html';
+    });
+
+    goAdminButton.addEventListener('click', function() {
+        window.location.href = 'admin.html';
+    });
+  </script>
 </body>
 </html>

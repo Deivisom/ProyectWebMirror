@@ -42,6 +42,11 @@ app.get('/:page', (req, res, next) => {
   res.sendFile(path.join(publicPath, pageFile));
 });
 
+app.use((req, res) => {
+  res.status(404).send('Página no encontrada');
+});
+
+
 app.use((err, req, res, next) => {
   console.error('Middleware de error:', err);
   res.status(500).json({ error: 'Error interno del servidor' });
