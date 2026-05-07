@@ -452,8 +452,6 @@
     </footer>
 
     <script>
-        const ADMIN_USERNAME = 'akn.raouia';
-
         const currentUserKey = 'steam_current_user';
         const tokenKey = 'steam_jwt_token';
 
@@ -489,7 +487,7 @@
         }
 
         function isAdmin(user) {
-            return user && user.username === ADMIN_USERNAME;
+            return user && user.role === 'admin';
         }
 
         function updateSupportLinks(user) {
@@ -517,7 +515,7 @@
             loggedInBox.style.display = 'none';
             errorMsg.style.display = 'none';
 
-            document.getElementById('username').value = ADMIN_USERNAME;
+            document.getElementById('username').value = '';
             document.getElementById('password').value = '';
             document.getElementById('username').focus();
 
