@@ -771,7 +771,13 @@ window.filterTabs = function (category) {
     let filteredGames;
     switch (category) {
         case 'novedades':
-            filteredGames = shuffleArray(allGames.filter(game => game.category === 'destacados')).slice(0, 10);
+            // Priorizar juegos con categoría 'novedades'
+            filteredGames = allGames.filter(game => game.category === 'novedades');
+            // Si hay pocos, rellenar con destacados para mantener la estética
+            if (filteredGames.length < 6) {
+                const extras = allGames.filter(game => game.category === 'destacados' && !filteredGames.find(g => g.id === game.id));
+                filteredGames = filteredGames.concat(shuffleArray(extras)).slice(0, 10);
+            }
             break;
         case 'ventas':
             filteredGames = shuffleArray(allGames.filter(game =>

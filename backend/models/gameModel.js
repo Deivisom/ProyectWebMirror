@@ -45,13 +45,13 @@ async function findAll({ page, limit, search, category }) {
     const limitNumber = Number.isNaN(parseInt(limit, 10)) ? 10 : parseInt(limit, 10);
     const offset = (pageNumber - 1) * limitNumber;
     const [rows] = await pool.query(
-      `SELECT * FROM games ${whereClause} LIMIT ? OFFSET ?`,
+      `SELECT * FROM games ${whereClause} ORDER BY id DESC LIMIT ? OFFSET ?`,
       [...params, limitNumber, offset]
     );
     return rows.map(parseScreenshots);
   }
 
-  const [rows] = await pool.query(`SELECT * FROM games ${whereClause}`, params);
+  const [rows] = await pool.query(`SELECT * FROM games ${whereClause} ORDER BY id DESC`, params);
   return rows.map(parseScreenshots);
 }
 

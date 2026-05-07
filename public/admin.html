@@ -27,7 +27,8 @@
     <main class="container mt-4">
         <div class="row">
             <div class="col-md-4">
-                <h2>Crear/Editar Juego</h2>
+                <div class="admin-sticky-sidebar">
+                    <h2>Crear/Editar Juego</h2>
                 <form id="gameForm">
                     <input type="hidden" id="gameId">
                     <div class="mb-3">
@@ -36,10 +37,10 @@
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">Categoría</label>
-                        <select class="form-control" id="category" name="category" required>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="novedades" selected>Novedades</option>
                             <option value="destacados">Destacados</option>
                             <option value="descuentos">Descuentos</option>
-                            <option value="novedades">Novedades</option>
                             <option value="ventas">Ventas</option>
                             <option value="proximos">Próximos</option>
                         </select>
@@ -75,6 +76,7 @@
                     <button type="submit" class="btn btn-success">Guardar</button>
                     <button type="button" class="btn btn-secondary" onclick="resetForm()">Limpiar</button>
                 </form>
+                </div>
             </div>
             <div class="col-md-8">
                 <h2>Lista de Juegos</h2>
@@ -105,14 +107,16 @@
             const container = document.getElementById('gamesList');
             container.innerHTML = games.map(game => `
                 <div class="col-md-6 mb-3">
-                    <div class="card">
-                        <img src="${game.main_image}" class="card-img-top" alt="${game.title}">
+                    <div class="card admin-game-card">
+                        <img src="${game.main_image}" class="card-img-top" alt="${game.title}" style="height: 150px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title">${game.title}</h5>
-                            <p class="card-text">Categoría: ${game.category}</p>
-                            <p class="card-text">Precio: ${game.price || 'N/A'}</p>
-                            <button class="btn btn-primary btn-sm" onclick="editGame(${game.id})">Editar</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteGame(${game.id})">Eliminar</button>
+                            <h5 class="card-title text-truncate">${game.title}</h5>
+                            <p class="card-text small mb-1">Categoría: <span class="badge bg-secondary">${game.category}</span></p>
+                            <p class="card-text small">Precio: ${game.price || 'N/A'}</p>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-primary btn-sm flex-grow-1" onclick="editGame(${game.id})">Editar</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteGame(${game.id})">Eliminar</button>
+                            </div>
                         </div>
                     </div>
                 </div>

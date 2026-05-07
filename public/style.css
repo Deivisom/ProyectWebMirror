@@ -213,7 +213,7 @@ body {
 .sub-menu {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 15px;
 }
 
 .sub-menu a {
@@ -2312,3 +2312,60 @@ body {
     background: rgba(103, 193, 245, 0.2);
     color: #fff;
 }
+
+/* =========================================
+   ADMIN PANEL STYLES
+   ========================================= */
+.admin-sticky-sidebar {
+    position: sticky;
+    top: 20px;
+    z-index: 10;
+}
+
+.admin-sticky-sidebar h2, .col-md-8 h2 {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    margin-bottom: 20px;
+}
+
+#gameForm {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#gameForm .form-label {
+    color: #66c0f4;
+    font-weight: bold;
+}
+
+#gameForm .form-control, #gameForm .form-select {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white !important;
+}
+
+#gameForm .form-control:focus {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: #66c0f4;
+    box-shadow: 0 0 0 0.25rem rgba(102, 192, 244, 0.25);
+    color: white !important;
+}
+
+.admin-game-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s;
+    height: 100%;
+    color: #ffffff;
+}
+
+.admin-game-card .card-title {
+    color: #ffffff;
+}
+
+.admin-game-card:hover {
+    transform: translateY(-5px);
+    border-color: #66c0f4;
+}
